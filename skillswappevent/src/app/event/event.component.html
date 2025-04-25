@@ -1,0 +1,39 @@
+<div class="container mt-4">
+    <div class="row mb-3">
+        <div class="col-md-4 offset-md-4">
+            <input type="text" class="form-control" [(ngModel)]="searchname" placeholder="Search events...">
+        </div>
+
+        <div class="col-md-2">
+            <button type="button" class="btn btn-success" routerLink="addevent">Add Event</button>
+        </div>
+    </div>  <br>
+
+    <div class="row">
+        <div class="col-md-6 mb-4" *ngFor="let event of onSearch(); let i = index">
+            <div class="card h-100 shadow-sm" style="height: 400px;">
+                <img [src]="event.posterURL" class="card-img-top" alt="Event Poster" style="height: 250px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ event.eventName }}</h5>
+                    <p class="card-text">{{ event.eventDescription }}</p>
+                    <p class="card-text"><strong>Location:</strong> {{ event.location }}</p>
+                    <p class="card-text"><strong>Type:</strong> {{ event.eventType }}</p>
+                    <p class="card-text">
+                        <strong>Starts:</strong> {{ event.eventStartDate | date:'mediumDate' }}<br>
+                        <strong>Ends:</strong> {{ event.eventEndDate | date:'mediumDate' }}
+                    </p>
+                    <p class="card-text">
+                        <strong>Max Participants:</strong> {{ event.maxParticipants }}<br>
+                        <strong>Register By:</strong> {{ event.registrationEndDate | date:'mediumDate' }}
+                    </p><br>
+                    <div class="d-flex justify-content-center gap-2 mt-3">
+                        <a [routerLink]="['/modifyevent', event.eventId]" class="btn btn-primary">Modify</a>
+                        <button class="btn btn-danger" (click)="deleteEvent(event.eventId)">Delete</button>
+                        <button class="btn btn-success" (click)="register(event.eventId)">Register</button>
+                        <a [routerLink]="['/feedback', event.eventId]" class="btn btn-warning">Feedback</a>
+                    </div><br>         
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

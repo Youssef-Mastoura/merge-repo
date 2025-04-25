@@ -1,0 +1,52 @@
+<div class="container mt-4">
+    <h2>Add New Event</h2>
+    <form (ngSubmit)="onSubmit()" #eventForm="ngForm">
+      <div class="mb-3">
+        <label for="eventName" class="form-label">Event Name</label>
+        <input type="text" id="eventName" class="form-control" required [(ngModel)]="event.eventName" name="eventName">
+      </div>
+  
+      <div class="mb-3">
+        <label for="eventDescription" class="form-label">Event Description</label>
+        <textarea id="eventDescription" class="form-control" required [(ngModel)]="event.eventDescription" name="eventDescription"></textarea>
+      </div>
+  
+      <div class="mb-3">
+        <label for="eventType" class="form-label">Event Type</label>
+        <input type="text" id="eventType" class="form-control" required [(ngModel)]="event.eventType" name="eventType">
+      </div>
+  
+      <div class="mb-3">
+        <label for="posterURL" class="form-label">Poster URL</label>
+        <input type="text" id="posterURL" class="form-control" required [(ngModel)]="event.posterURL" name="posterURL">
+      </div>
+  
+      <div class="mb-3">
+        <label for="eventStartDate" class="form-label">Event Start Date</label>
+        <input type="datetime-local" id="eventStartDate" class="form-control" required [(ngModel)]="event.eventStartDate" name="eventStartDate">
+      </div>
+  
+      <div class="mb-3">
+        <label for="eventEndDate" class="form-label">Event End Date</label>
+        <input type="datetime-local" id="eventEndDate" class="form-control" required [(ngModel)]="event.eventEndDate" name="eventEndDate">
+      </div>
+  
+      <div class="mb-3">
+        <label for="maxParticipants" class="form-label">Max Participants</label>
+        <input type="number" id="maxParticipants" class="form-control" required [(ngModel)]="event.maxParticipants" name="maxParticipants">
+      </div>
+  
+      <div class="mb-3">
+        <label for="registrationEndDate" class="form-label">Registration End Date</label>
+        <input type="datetime-local" id="registrationEndDate" class="form-control" required [(ngModel)]="event.registrationEndDate" name="registrationEndDate">
+      </div>
+  
+      <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input type="text" id="location" class="form-control" required [(ngModel)]="event.location" name="location">
+      </div>
+  
+      <button type="submit" class="btn btn-success" [disabled]="!eventForm.form.valid">Submit</button>
+    </form>
+  </div>
+  

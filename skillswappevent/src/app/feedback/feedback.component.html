@@ -1,0 +1,26 @@
+<div class="card h-100 shadow-sm" style="height: 400px;">
+    <img [src]="feedbackevent?.posterURL" class="card-img-top" alt="Event Poster" style="height: 250px; object-fit: cover;">
+    <div class="card-body">
+        <h5 class="card-title">{{ feedbackevent?.eventName }}</h5>
+        <p class="card-text">{{ feedbackevent?.eventDescription }}</p>
+        <p class="card-text"><strong>Location:</strong> {{ feedbackevent?.location }}</p>
+        <p class="card-text"><strong>Type:</strong> {{ feedbackevent?.eventType }}</p>
+        <p class="card-text">
+            <strong>Starts:</strong> {{ feedbackevent?.eventStartDate | date:'mediumDate' }}<br>
+            <strong>Ends:</strong> {{ feedbackevent?.eventEndDate | date:'mediumDate' }}
+        </p>
+        <p class="card-text">
+            <strong>Max Participants:</strong> {{ feedbackevent?.maxParticipants }}<br>
+            <strong>Register By:</strong> {{ feedbackevent?.registrationEndDate | date:'mediumDate' }}
+        </p>
+        </div>         
+    </div>  
+<div class="mt-4">
+  <h5>Leave Your Feedback</h5>
+  <textarea [(ngModel)]="feedback.comment" class="form-control" placeholder="Write your comment..." rows="4"></textarea>
+  <br>
+  <label>Rating:</label>
+  <input type="number" [(ngModel)]="feedback.eventRating" class="form-control" min="0" max="5">
+  <br>
+  <button class="btn btn-success" (click)="submitFeedback()">Send Feedback</button>
+</div>
