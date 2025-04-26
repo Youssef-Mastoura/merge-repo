@@ -1,0 +1,167 @@
+<div class="adobe-style-container">
+  <div class="adobe-style-card">
+    <div class="adobe-style-header">
+      <h2>Add new Account</h2>
+    </div>
+
+    <div class="adobe-style-body">
+      <form [formGroup]="comptebancaireForm" (ngSubmit)="ajouter()">
+        <!-- Champ Montant -->
+        <div class="adobe-form-group">
+          <label class="adobe-label">Ammount</label>
+          <input
+            type="number"
+            formControlName="montant"
+            class="adobe-input"
+            placeholder="Entrez le montant"
+            required
+          />
+          <div
+            *ngIf="
+              comptebancaireForm.get('montant')?.invalid &&
+              comptebancaireForm.get('montant')?.touched
+            "
+            class="adobe-error"
+          >
+            Ammount must be positive
+          </div>
+        </div>
+
+        <!-- Champ Utilisateur -->
+        <div class="adobe-form-group">
+          <label class="adobe-label">Utilisateur</label>
+          <select formControlName="userId" class="adobe-input" required>
+            <option value="" disabled selected>Select a user</option>
+            <option *ngFor="let user of users" [value]="user.id_User">
+              {{ user.first_Name }} {{ user.last_Name }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              comptebancaireForm.get('userId')?.invalid &&
+              comptebancaireForm.get('userId')?.touched
+            "
+            class="adobe-error"
+          >
+            User is important
+          </div>
+        </div>
+        <!-- Bouton Submit -->
+        <button
+          type="submit"
+          class="adobe-button"
+          [disabled]="comptebancaireForm.invalid"
+        >
+          Add
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+<style>
+  .adobe-style-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #fce4ec;
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  }
+
+  .adobe-style-card {
+    width: 100%;
+    max-width: 500px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+  }
+
+  .adobe-style-header {
+    background: linear-gradient(135deg, #e91e63 0%, #ad1457 100%);
+    color: white;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .adobe-style-header h2 {
+    margin: 0;
+    font-weight: 500;
+    font-size: 1.5rem;
+  }
+
+  .adobe-style-body {
+    padding: 32px;
+  }
+
+  .adobe-form-group {
+    margin-bottom: 24px;
+  }
+
+  .adobe-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+    font-size: 0.95rem;
+  }
+
+  .adobe-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s;
+    box-sizing: border-box;
+  }
+
+  .adobe-input:focus {
+    outline: none;
+    border-color: #e91e63;
+    box-shadow: 0 0 0 2px rgba(233, 30, 99, 0.2);
+  }
+
+  select.adobe-input {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+  }
+
+  .adobe-button {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #e91e63 0%, #ad1457 100%);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 8px;
+  }
+
+  .adobe-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(233, 30, 99, 0.2);
+  }
+
+  .adobe-button:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  .adobe-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .adobe-error {
+    color: #e74c3c;
+    font-size: 0.85rem;
+    margin-top: 6px;
+    font-weight: 400;
+  }
+</style>

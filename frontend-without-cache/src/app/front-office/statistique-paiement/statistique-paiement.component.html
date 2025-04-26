@@ -1,0 +1,18 @@
+<div class="statistiques-container">
+    <h2>Statistiques des paiements</h2>
+  
+    <div class="stat-bar">
+      <span>Solde ({{ soldeCount }})</span>
+      <div class="progress-bar">
+        <div class="progress solde" [style.width.%]="soldePourcentage">{{ soldePourcentage | number:'1.0-0' }}%</div>
+      </div>
+    </div>
+  
+    <div class="stat-bar">
+      <span>Carte Bancaire ({{ carteCount }})</span>
+      <div class="progress-bar">
+        <div class="progress carte" [style.width.%]="cartePourcentage">{{ cartePourcentage | number:'1.0-0' }}%</div>
+      </div>
+    </div>
+  </div>
+  

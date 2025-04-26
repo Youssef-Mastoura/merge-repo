@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestion des Réclamations</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f7cbd6, #dbe9f8);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header-card {
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+      padding: 40px 30px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      font-size: 32px;
+      color: #2e2e2e;
+      margin-bottom: 10px;
+    }
+
+    .description {
+      color: #555;
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .btn-add {
+      background-color: #9b42d3;
+      color: #fff;
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 30px;
+    }
+
+    .btn-add:hover {
+      background-color: #812cb0;
+    }
+
+    .illustration-img {
+      width: 80px;
+      margin-top: 30px;
+    }
+
+    /* Styles pour la liste des réponses */
+    .response-list {
+      background-color: white;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .response-item {
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+      transition: all 0.3s ease;
+    }
+
+    .response-item:hover {
+      background-color: #f9f9f9;
+    }
+
+    .response-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .response-actions .btn {
+      margin-left: 10px;
+      padding: 5px 10px;
+      font-size: 14px;
+    }
+
+    .loading-spinner {
+      text-align: center;
+      padding: 40px;
+    }
+
+    .alert {
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .alert-danger {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+
+    .alert-info {
+      background-color: #d1ecf1;
+      color: #0c5460;
+    }
+
+    @media (max-width: 768px) {
+      .header-card {
+        padding: 30px 20px;
+      }
+      
+      h1 {
+        font-size: 26px;
+      }
+
+      .description {
+        font-size: 16px;
+      }
+
+      .btn-add {
+        width: 100%;
+        padding: 12px;
+      }
+
+      .response-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .response-actions {
+        margin-top: 10px;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="main-container">
+    <!-- En-tête -->
+    <div class="header-card">
+      <h1>Gestion des Réclamations</h1>
+      <p class="description">Consultez et gérez vos réponses aux réclamations</p>
+      
+      <a routerLink="/student/ajouter-reclamation" class="btn-add">
+        <i class="bi bi-plus-circle" style="margin-right: 8px;"></i>
+        Ajouter une Réclamation
+      </a>
+      
+      <img src="../../assets/images/image.png" alt="Illustration" class="illustration-img">
+    </div>
+
+    <!-- Section des réponses -->
+    <div class="response-list">
+      <!-- État de chargement -->
+      <div *ngIf="isLoading" class="loading-spinner">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Chargement...</span>
+        </div>
+      </div>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+
+      <!-- État vide -->
+      <div *ngIf="!isLoading && reponses.length === 0" class="alert alert-info">
+        Vous n'avez pas encore répondu à des réclamations.
+      </div>
+
+      <!-- Liste des réponses -->
+      <div *ngFor="let reponse of reponses" class="response-item">
+        <div class="response-header">
+          <div>
+            <h5>Réponse #{{ reponse.id }}</h5>
+            <small class="text-muted">
+              {{ reponse.dateReponse | date:'mediumDate' }} à {{ reponse.dateReponse | date:'shortTime' }}
+            </small>
+          </div>
+          <div class="response-actions">
+           
+            <button class="btn btn-sm btn-outline-danger" 
+            (click)="deleteReponse(reponse.id)">
+      <i class="bi bi-trash"></i> Supprimer
+    </button>
+          </div>
+        </div>
+        <p class="mt-2">{{ reponse.contenu }}</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

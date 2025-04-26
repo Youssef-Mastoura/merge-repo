@@ -1,0 +1,124 @@
+<div class="container mt-5">
+  <div class="status-search">
+    <input
+      type="text"
+      [(ngModel)]="searchStatus"
+      placeholder="Enter the status 💬 "
+    />
+    <span class="search-icon" (click)="searchByStatus()">🔍</span>
+  </div>
+  <!--
+    
+    <div *ngIf="reclamations.length === 0">
+      No claims found✖️
+    </div>
+  -->
+
+  <!-- Message si aucune réclamation -->
+  <div
+    *ngIf="reclamations.length === 0"
+    class="alert alert-warning text-center shadow-sm border border-warning"
+  >
+    <i class="bi bi-info-circle me-2 text-warning"></i> No claims available at
+    this time✖️
+  </div>
+
+  <!-- Tableau des réclamations -->
+  <div
+    class="table-responsive"
+    *ngIf="reclamations.length > 0"
+    class="table-responsive"
+  >
+    <h6 class="text-4xl fw-bold mb-5" style="color: #ae00ff">
+      <i class="bi bi-exclamation-triangle-fill me-2 text-warning fs-10"></i>
+      <span class="text-primary">📋 List of Claims</span>
+    </h6>
+
+    <table
+      class="table table-hover"
+      class="table text-center table-bordered shadow rounded-4 overflow-hidden border border-primary"
+    >
+      <thead
+        style="
+          background: linear-gradient(to right, #e600ff, #6610f2);
+          color: white;
+        "
+      >
+        <tr scope="row">
+          <th scope="col" scope="row">ID</th>
+          <th scope="col">Status</th>
+          <th scope="col" scope="row">Submission Date</th>
+          <th scope="col" scope="row">Description</th>
+          <th scope="col">Solution</th>
+          <th scope="col">Type</th>
+          <!--
+            <th scope="col">Role</th>-->
+          <th scope="col">Priority</th>
+
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reclamation of reclamations">
+          <td class="fw-semibold text-primary">
+            {{ reclamation.idReclamation }}
+          </td>
+          <td>{{ reclamation.status }}</td>
+          <td>{{ reclamation.dateSubmitted | date : "dd/MM/yyyy" }}</td>
+          <td>{{ reclamation.description }}</td>
+          <td>{{ reclamation.solution }}</td>
+          <td>{{ reclamation.type }}</td>
+          <!--
+            <td>{{ reclamation.user?.role }}</td>-->
+          <td>
+            <span
+              [ngClass]="{
+                'badge bg-danger': reclamation.priorite === 'High',
+                'badge bg-warning text-dark': reclamation.priorite === 'Medium',
+                'badge bg-info text-white': reclamation.priorite === 'Low'
+              }"
+            >
+              {{ reclamation.priorite }}
+            </span>
+          </td>
+
+          <td>
+            <div class="d-flex flex-column gap-2">
+              <button
+                class="btn btn-sm fw-bold d-flex align-items-center gap-2 px-3 py-2 border-0 shadow-sm"
+                style="
+                  background: linear-gradient(to right, #416affcb, #ff2bd8cc);
+                  color: white;
+                  font-family: 'Poppins', sans-serif;
+                  border-radius: 12px;
+                  transition: all 0.3s ease;
+                "
+                class="btn btn-sm btn-outline-danger fw-bold"
+                (click)="deleteReclamation(reclamation)"
+              >
+                <i class="bi bi-trash-fill me-1"></i>Delete
+              </button>
+              <button
+                routerLink="/admin/reponse_reclamation"
+                style="
+                  background: linear-gradient(to right, #416affcb, #ff2bd8cc);
+                  color: white;
+                  font-family: 'Poppins', sans-serif;
+                  border-radius: 12px;
+                  transition: all 0.3s ease;
+                "
+                class="btn btn-sm btn-outline-primary fw-bold"
+              >
+                <i
+                  class="btn btn-sm fw-bold d-flex align-items-center gap-2 px-3 py-2 border-0 shadow-sm"
+                  class="bi bi-reply-fill me-1"
+                ></i>
+                Replay
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

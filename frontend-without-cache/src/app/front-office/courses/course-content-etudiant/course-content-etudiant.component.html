@@ -1,0 +1,110 @@
+<div class="container course-dashboard">
+    <div class="course-header">
+      <h1 class="course-title">
+        <i class="bi bi-journal-bookmark-fill"></i>
+        Course Content: {{ course?.title_Course }}
+      </h1>
+      <button class="mauve-gradient-btn" routerLink="/student/courses">
+        <i class="bi bi-arrow-left"></i> Back to Courses
+      </button>
+    </div>
+  
+    <div class="course-layout">
+      <!-- Main Content Section -->
+      <div class="content-main">
+        <div class="content-card">
+          <div class="card-header">
+            <h2><i class="bi bi-list-task"></i> Content List</h2>
+            <span class="content-badge">{{ contents.length }} item{{ contents.length !== 1 ? 's' : '' }}</span>
+          </div>
+          
+          <div class="card-body">
+            <div *ngIf="contents.length === 0" class="empty-state">
+              <i class="bi bi-info-circle"></i>
+              No content has been added to this course yet.
+            </div>
+            
+            <div class="content-items">
+              <div *ngFor="let content of contents; let i = index" 
+                   class="content-item"
+                   [class.even-item]="i % 2 === 0"
+                   (click)="showContent(content)">
+                <div class="item-header">
+                  <span class="order-badge">#{{ content.orderIndex_Content }}</span>
+                  <h3>{{ content.title_Content }}</h3>
+                  <span class="type-label" [class]="'type-' + content.type_Content.toLowerCase()">
+                    {{ content.type_Content }}
+                  </span>
+                </div>
+                
+                <p class="item-description" *ngIf="content.description_Content">
+                  {{ (content.description_Content.length > 120) ? 
+                     (content.description_Content ) + '...' : 
+                     content.description_Content }}
+                </p>
+                
+             
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Sidebar Section -->
+      <div class="course-sidebar">
+        <div class="info-card">
+          <div class="info-header">
+            <h2><i class="bi bi-info-circle"></i> Course Details</h2>
+          </div>
+          <div class="info-body">
+            <div class="info-section">
+              <h3>Description</h3>
+              <p>{{ course?.description_Course || 'No description available' }}</p>
+            </div>
+            <div class="info-section">
+              <h3>Statistics</h3>
+              <div class="stats-container">
+                <div class="stat-item">
+                  <i class="bi bi-file-text"></i>
+                  <span>Contents: {{ contents.length }}</span>
+                </div>
+                <div class="stat-item">
+                  <i class="bi bi-calendar-check"></i>
+                  <span>Last Updated: {{ course?.createdAt_Course  }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Content Display Modal -->
+  <div *ngIf="isContentModalOpen" class="modal-overlay" (click)="closeContentModal()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i class="bi" 
+             [class.bi-film]="contentType === 'VIDEO'"
+             [class.bi-file-earmark-pdf]="contentType === 'PDF'"
+             [class.bi-question-circle]="contentType === 'QUIZ'"
+             [class.bi-file-text]="contentType === 'TEXT'"></i>
+          <h2>{{ selectedContent?.title_Content }}</h2>
+        </div>
+        <button class="modal-close" (click)="closeContentModal()">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      
+      <div class="modal-content">
+        <!-- Content display remains the same -->
+      </div>
+      
+      <div class="modal-footer">
+        <button class="mauve-gradient-btn" (click)="closeContentModal()">
+          <i class="bi bi-check-lg"></i> Close
+        </button>
+      </div>
+    </div>
+  </div>

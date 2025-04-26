@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Leave A Review</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f7f7f7;
+    }
+
+    .review-container {
+      background: linear-gradient(to right, #f7cbd6, #dbe9f8);
+      max-width: 700px;
+      margin: 50px auto;
+      border-radius: 40px;
+      padding: 40px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    h2 {
+      color: #222;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .star {
+      font-size: 2rem;
+      color: #ccc;
+      cursor: pointer;
+      transition: color 0.2s ease, transform 0.2s;
+    }
+
+    .star.filled {
+      color: #ffc107;
+    }
+
+    .star:hover {
+      transform: scale(1.2);
+    }
+
+    .submit-btn {
+      background-color: #9b42d3;
+      border: none;
+      color: white;
+      font-weight: bold;
+      padding: 12px 20px;
+      border-radius: 25px;
+      width: 100%;
+      transition: background-color 0.3s;
+    }
+
+    .submit-btn:hover {
+      background-color: #7a32b1;
+    }
+
+    .thank-you {
+      margin-top: 20px;
+      color: green;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="review-container">
+    <h2><i class="bi bi-chat-heart-fill"></i> Leave a Review
+    </h2>
+
+    <form (ngSubmit)="submitReview()" #reviewForm="ngForm" class="review-form">
+      <div class="mb-3">
+        <label for="content" class="form-label">Comment :</label>
+        <textarea
+          id="content"
+          name="content"
+          [(ngModel)]="review.content"
+          required
+          rows="4"
+          placeholder="Écrivez votre avis ici..."
+          class="form-control"
+        ></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Note :</label>
+        <div class="d-flex gap-1">
+          <span
+            *ngFor="let star of stars; let i = index"
+            (click)="setRating(i + 1)"
+            (mouseover)="hoverRating(i + 1)"
+            (mouseleave)="hoverRating(0)"
+            [class.filled]="i < (hoveredRating || review.rating)"
+            class="star"
+            title="{{ i + 1 }} étoile(s)"
+          >
+            ★
+          </span>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="!reviewForm.form.valid" class="submit-btn">
+        <i class="bi bi-send-fill me-2"></i>Submit
+      </button>
+
+      <p *ngIf="submitted" class="thank-you">Thank You For Your Review. !</p>
+    </form>
+  </div>
+
+</body>
+</html>

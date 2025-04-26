@@ -1,0 +1,36 @@
+
+<br>
+<section class="montserrat text-center" style="margin: 70px;">
+  <p class="mb-4" style="font-size: 50px;color: rgb(138, 138, 138);" ><strong>🏆 TOP 5 EVENTS OF ALL TIME</strong></p> <br>
+</section>
+
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5 mb-4" *ngFor="let event of topEvents; let i = index">
+      <div class="card custom-card shadow-sm h-100">
+        <img [src]="event.posterURL" class="card-img-top" alt="Event Poster" />
+        <div class="card-body d-flex flex-column align-items-center text-center">
+          <h5 class="card-title event-name"><strong>{{ event.eventName }}</strong></h5>
+          <p class="card-text event-text"><strong>{{ event.eventDescription }}</strong></p>
+          <p class="card-text event-text"><strong>Type:</strong> {{ event.eventType }}</p>
+          <p class="card-text event-text">
+            <strong>Starts:</strong> {{ event.eventStartDate }}<br />
+            <strong>Ends:</strong> {{ event.eventEndDate }}
+          </p>
+          <p class="card-text event-text">
+            <strong>Max Participants:</strong> {{ event.maxParticipants }}<br />
+            <strong>Register By:</strong> {{ event.registrationEndDate }}
+          </p>
+
+          <button class="btn card-action-btn mt-3" style="margin-bottom:20px;margin-top:40px;">
+            ⭐ Rating: {{ ratingMessages[event.eventId] }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="d-flex justify-content-center mt-4">
+    <button class="btn top-action-btn" routerLink="/admin/event">Return</button>
+  </div><br><br>
+</div>

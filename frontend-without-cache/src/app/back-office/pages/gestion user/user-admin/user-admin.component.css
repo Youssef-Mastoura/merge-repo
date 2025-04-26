@@ -1,0 +1,143 @@
+.content {
+  background-color: url("https://www.transparenttextures.com/patterns/cubes.png");
+  background-image: linear-gradient(
+    to right top,
+    #cf4af3,
+    #e73bd7,
+    #f631bc,
+    #fd31a2,
+    #ff3a8b,
+    #ff4b78,
+    #ff5e68,
+    #ff705c,
+    #ff8c51,
+    #ffaa49,
+    #ffc848,
+    #ffe652
+  );
+}
+/* Animation pour le modal */
+.modal-enter {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  .modal-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 200ms, transform 200ms;
+  }
+  .modal-exit {
+    opacity: 1;
+  }
+  .modal-exit-active {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 200ms, transform 200ms;
+  }
+  
+  /* Style pour le défilement */
+  .modal-content::-webkit-scrollbar {
+    width: 8px;
+  }
+  .modal-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+  .modal-content::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 10px;
+  }
+  .modal-content::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+  }
+  
+  /* Effet de profondeur */
+  .modal-shadow {
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 
+                0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .modal-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  /* transition fluide pour l'input de recherche */
+input {
+  transition: all 0.3s ease;
+}
+
+/* style pour le placeholder */
+input::placeholder {
+  color: #9CA3AF;
+  opacity: 1;
+}
+
+/* style au focus */
+input:focus {
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+/* Container principal */
+.search-container {
+  background-color: rgba(255, 255, 255, 0.31);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Flex container pour alignement horizontal */
+.search-container > div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Barre de recherche */
+.search-input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 3rem;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 1rem;
+  font-size: 0.95rem;
+  color: #4a5568;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  min-width: 300px; /* Largeur minimale */
+}
+
+/* Critères en ligne */
+.search-criteria {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin-left: 1rem;
+}
+
+.criteria-label {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  background-color: rgba(237, 233, 254, 0.5);
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+  font-size: 0.85rem;
+}
+
+/* Icône positionnée absolument dans la barre */
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b46c1;
+  z-index: 10;
+}

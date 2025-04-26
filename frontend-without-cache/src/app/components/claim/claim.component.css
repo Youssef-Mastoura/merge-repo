@@ -1,0 +1,81 @@
+.content {
+    background-color: url("https://www.transparenttextures.com/patterns/cubes.png");
+    background-image: linear-gradient(
+      to right top,
+      #cf4af3,
+      #e73bd7,
+      #f631bc,
+      #fd31a2,
+      #ff3a8b,
+      #ff4b78,
+      #ff5e68,
+      #ff705c,
+      #ff8c51,
+      #ffaa49,
+      #ffc848,
+      #ffe652
+    );
+  }
+  .status-search {
+    position: relative;
+    width: 300px;
+    margin-left: auto; /* Pour aligner à droite */
+    margin-right: 20px;
+  }
+  
+  .status-search input {
+    width: 100%;
+    padding: 10px 45px 10px 15px;
+    border: 2px solid #00000053; /* Bord plus visible */
+    border-radius: 999px; /* Rond complet */
+    background-color: #fff; /* Fond blanc */
+    box-sizing: border-box;
+    font-size: 14px;
+    outline: none;
+    color: #3333336c;
+  }
+  
+  .status-search .search-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+  }
+  .table tbody tr {
+    border-bottom: 1px solid #dee2e6; /* ligne séparatrice douce */
+  }
+  
+  .table thead th {
+    border-width:2px ;
+  
+    vertical-align: middle;
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+    transition: background-color 0.3s ease;
+    border-bottom: 1px solid #dee2e6; /* ligne séparatrice douce */
+  
+  }
+  
+  .table tbody td {
+    vertical-align: middle;
+    text-align: center;
+    padding: 12px;
+  }
+  
+  .table-hover tbody tr:hover {
+    background-color: #f5f5f5;
+    transition: background-color 0.3s ease;
+  }
+  
+  
+  
+  .badge {
+    padding: 0.5em 0.8em;
+    font-size: 0.85rem;
+    border-radius: 12px;
+    font-weight: 600;
+  }
+  

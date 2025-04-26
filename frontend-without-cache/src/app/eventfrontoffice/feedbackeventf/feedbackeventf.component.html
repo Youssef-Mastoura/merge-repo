@@ -1,0 +1,252 @@
+
+
+<div class="main-container px-3 px-md-5">
+  <div class="header-banner" style="margin-top: 30px;">
+    <div class="d-flex justify-content-between align-items-center flex-wrap">
+
+      <!-- Left: Title and Subtitle -->
+      <div class="d-flex align-items-center">
+        <div>
+          <div class="d-flex text-center mb-1">
+            <h1 class="header-title me-2 mb-0 league" style="font-size: 50px; margin-left: 90px;">🏟️  SKILLSWAP EVENTS</h1>
+          </div>
+          <p class="header-subtitle mb-0 montserrat" style="font-size: 20px;padding: 20px;margin-left: 90px;margin-top: 30px;">Manage and organize all your events in one place</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<br><br><br>
+
+<section class="league text-center">
+  <p class="mb-4" style="font-size: 50px;"><strong>EXPLORE OUR EVENTS</strong></p> <br>
+  <p class="mb-4" style="font-size: 50px;"><strong>DISCOVER A NEW WORLD</strong></p>
+</section>
+<br><br><br><br>
+
+<section class="features">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="feature-block d-flex justify-content-center flex-wrap gap-4"> 
+          <!-- Card 1 -->
+          <div class="feature-card"> 
+            <button routerLink="/student/eventf" class="feature-button">
+              <div class="feature-content">
+                <span class="feature-icon">🎤</span>
+                <span class="feature-text montserrat">ALL EVENTS</span>
+              </div>
+            </button>
+          </div>
+          
+          <!-- Card 2 -->
+          <div class="feature-card"> 
+            <button routerLink="/student/topfiveeventf" class="feature-button">
+              <div class="feature-content">
+                <span class="feature-icon">🏆</span>
+                <span class="feature-text montserrat">TOP 5 EVENTS</span>
+              </div>
+            </button>
+          </div>
+          
+          <!-- Card 3 -->
+          <div class="feature-card"> 
+            <button routerLink="/student/eventregistrationsf" class="feature-button">
+              <div class="feature-content">
+                <span class="feature-icon">📅</span>
+                <span class="feature-text montserrat">MY REGISTRATIONS</span>
+              </div>
+            </button>
+          </div>
+          <div class="feature-card"> 
+            <button routerLink="/student/eventchatbot" class="feature-button">
+              <div class="feature-content">
+                <span class="feature-icon">🤖</span>
+                <span class="feature-text montserrat">CHAT BOT</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<br><br>
+
+<div class="feedback-container">
+  <!-- Success Modal -->
+  <div class="modal-overlay" *ngIf="showSuccessModal">
+    <div class="modern-modal success-modal">
+      <div class="modal-icon">
+        <svg viewBox="0 0 24 24" width="90" height="90" fill="#10B981">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+      </div>
+      <div class="modal-body">
+        <h3 class="modal-title">Feedback Submitted!</h3>
+        <p class="modal-message">Thank you for your valuable feedback!</p>
+      </div>
+      <div class="modal-actions">
+        <button class="modern-btn primary-btn" (click)="closeModal()">
+          Continue
+          <i class="bi bi-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error Modal -->
+  <div class="modal-overlay" *ngIf="showErrorModal">
+    <div class="modern-modal error-modal">
+      <div class="modal-icon">
+        <svg viewBox="0 0 24 24" width="90" height="90" fill="#EF4444">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+        </svg>
+      </div>
+      <div class="modal-body">
+        <h3 class="modal-title">Oops!</h3>
+        <p class="modal-message">{{ errorMessage }}</p>
+      </div>
+      <div class="modal-actions">
+        <button class="modern-btn secondary-btn" (click)="closeErrorModal()">
+          Got It
+          <i class="bi bi-check-lg"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="feedback-wrapper">
+    <!-- Event Card -->
+    <div class="feedback-event-card" *ngIf="feedbackevent">
+      <div class="event-poster-container">
+        <img [src]="feedbackevent.posterURL" class="event-poster" alt="Event Poster">
+        <div class="event-badge">{{ feedbackevent.eventType }}</div>
+      </div>
+      <div class="event-details">
+        <br>
+        <h2 class="event-title text-center">{{ feedbackevent.eventName }}</h2>
+        
+        <div class="event-info-grid">
+          <div class="info-item">
+          </div>
+          <div class="info-item">
+          </div>
+          <div class="info-item">
+          </div>
+          <div class="info-item">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feedback Form -->
+    <div class="feedback-form-container">
+      <div class="form-header">
+        <h3>Share Your Experience</h3>
+        <p>We'd love to hear your thoughts about this event</p>
+      </div>
+
+      <div class="rating-section">
+        <label>Your Rating</label>
+        <div class="star-rating">
+          <span *ngFor="let star of [1,2,3,4,5]" 
+                (click)="feedback.eventRating = star"
+                [class.active]="star <= feedback.eventRating">
+            <i class="bi" [ngClass]="star <= feedback.eventRating ? 'bi-star-fill' : 'bi-star'"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Your Feedback</label>
+        <textarea [(ngModel)]="feedback.comment" class="form-control" 
+                  placeholder="What did you like about the event? What could be improved?" 
+                  rows="5"></textarea>
+      </div>
+
+      <button class="submit-btn" (click)="submitFeedback()">
+        <i class="bi bi-send"></i> Submit Feedback
+      </button>
+    </div>
+  </div>
+</div>
+<br><br><br>
+<section class="faq-section py-5" style="background: linear-gradient(to right, #f3dbff56, #ffbbe163);">
+  <div class="container">
+    <h2 class="text-center mb-5 montserrat" style="font-size: 2.5rem; color: #2c3e50;">Frequently Asked Questions</h2>
+    
+    <div class="accordion">
+      <!-- FAQ Item 1 -->
+      <div class="accordion-item mb-3">
+        <h3 class="accordion-header">
+          <button class="accordion-button collapsed montserrat" type="button" 
+                  (click)="toggleAccordion(1)"
+                  [attr.aria-expanded]="activeIndex === 1">
+            How do I register for an event?
+            <i class="bi bi-chevron-down ms-auto" [class.rotate]="activeIndex === 1"></i>
+          </button>
+        </h3>
+        <div class="accordion-collapse" [class.show]="activeIndex === 1">
+          <div class="accordion-body montserrat">
+            Simply click the "Register" button on the event card. Make sure to register before the registration deadline.
+          </div>
+        </div>
+      </div>
+
+
+      <!-- FAQ Item 3 -->
+      <div class="accordion-item mb-3">
+        <h3 class="accordion-header">
+          <button class="accordion-button collapsed montserrat" type="button" 
+                  (click)="toggleAccordion(3)"
+                  [attr.aria-expanded]="activeIndex === 3">
+            When can I provide feedback for an event?
+            <i class="bi bi-chevron-down ms-auto" [class.rotate]="activeIndex === 3"></i>
+          </button>
+        </h3>
+        <div class="accordion-collapse" [class.show]="activeIndex === 3">
+          <div class="accordion-body montserrat">
+            Feedback can be provided starting from when the event begins until 7 days after the event ends.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Item 4 -->
+      <div class="accordion-item mb-3">
+        <h3 class="accordion-header">
+          <button class="accordion-button collapsed montserrat" type="button" 
+                  (click)="toggleAccordion(4)"
+                  [attr.aria-expanded]="activeIndex === 4">
+            Are there any fees for attending events?
+            <i class="bi bi-chevron-down ms-auto" [class.rotate]="activeIndex === 4"></i>
+          </button>
+        </h3>
+        <div class="accordion-collapse" [class.show]="activeIndex === 4">
+          <div class="accordion-body montserrat">
+            Most events are free, but some special workshops or premium events may have a fee. This will be clearly indicated on the event details page.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Item 5 -->
+      <div class="accordion-item mb-3">
+        <h3 class="accordion-header">
+          <button class="accordion-button collapsed montserrat" type="button" 
+                  (click)="toggleAccordion(5)"
+                  [attr.aria-expanded]="activeIndex === 5">
+            How do I know if my registration was successful?
+            <i class="bi bi-chevron-down ms-auto" [class.rotate]="activeIndex === 5"></i>
+          </button>
+        </h3>
+        <div class="accordion-collapse" [class.show]="activeIndex === 5">
+          <div class="accordion-body montserrat">
+            You'll see a confirmation popup immediately after registering, and you'll also receive a confirmation email. You can always check your registrations in the "My Registrations" section.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><br>

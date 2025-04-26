@@ -1,0 +1,492 @@
+<div class="flex items-center justify-between mb-3 mt-6">
+  <div class="font-medium text-gray-700">Users List</div>
+
+  <div class="flex items-center space-x-4">
+    <!-- Barre de recherche -->
+
+    <div class="search-container">
+      <div class="flex items-center gap-4">
+        <!-- Barre de recherche -->
+        <div class="relative flex-1">
+          <svg
+            class="search-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input
+            type="text"
+            [(ngModel)]="searchTerm"
+            (input)="filterUsers()"
+            class="search-input"
+            placeholder="Rechercher un utilisateur..."
+          />
+        </div>
+
+        <!-- Critères en ligne -->
+        <div class="search-criteria">
+          <label class="criteria-label">
+            <input
+              type="checkbox"
+              class="criteria-checkbox"
+              [(ngModel)]="searchCriteria.firstName"
+              (change)="filterUsers()"
+            />
+            <span>Prénom</span>
+          </label>
+
+          <label class="criteria-label">
+            <input
+              type="checkbox"
+              class="criteria-checkbox"
+              [(ngModel)]="searchCriteria.lastName"
+              (change)="filterUsers()"
+            />
+            <span>Nom</span>
+          </label>
+
+          <label class="criteria-label">
+            <input
+              type="checkbox"
+              class="criteria-checkbox"
+              [(ngModel)]="searchCriteria.email"
+              (change)="filterUsers()"
+            />
+            <span>Email</span>
+          </label>
+
+          <label class="criteria-label">
+            <input
+              type="checkbox"
+              class="criteria-checkbox"
+              [(ngModel)]="searchCriteria.role"
+              (change)="filterUsers()"
+            />
+            <span>Rôle</span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <!-- Bouton Export Data -->
+    <span
+      class="relative inline-block px-3 py-1 font-semibold leading-tight text-gray-700 cursor-pointer hover:bg-gray-100 rounded-full"
+      style="background-color: rgba(227, 202, 221, 0.929)"
+      (click)="exportdata()"
+    >
+      <span
+        aria-hidden="true"
+        class="absolute inset-0 rounded-full bg-gray-200 opacity-50"
+      ></span>
+      <span class="relative">DATA EXPORT</span>
+    </span>
+  </div>
+</div>
+<div
+  class="mt-8 rounded-2xl"
+  style="background-color: rgba(158, 158, 158, 0.3)"
+>
+  <div class="container mx-auto">
+    <div class="py-8">
+      <div class="py-4">
+        <div class="max-w-full overflow-x-auto rounded-lg">
+          <table class="w-full leading-normal text-black">
+            <thead>
+              <tr>
+                <th
+                  scope="col"
+                  class="border-b border-gray-200 px-5 py-3 text-left text-sm font-normal uppercase"
+                >
+                  ID
+                </th>
+                <th
+                  scope="col"
+                  class="border-b border-gray-200 px-5 py-3 text-left text-sm font-normal uppercase"
+                >
+                  Picture
+                </th>
+                <th
+                  scope="col"
+                  class="border-b border-gray-200 px-5 py-3 text-left text-sm font-normal uppercase"
+                >
+                  First Name
+                </th>
+                <th
+                  scope="col"
+                  class="border-b border-gray-200 px-5 py-3 text-left text-sm font-normal uppercase"
+                >
+                  Last Name
+                </th>
+                <th
+                  scope="col"
+                  class="border-b border-gray-200 px-5 py-3 text-left text-sm font-normal uppercase"
+                >
+                  Role
+                </th>
+                <th
+                  scope="col"
+                  class="border-b border-gray-200 px-5 py-3 text-left text-sm font-normal uppercase"
+                >
+                  Email
+                </th>
+                <th
+                  scope="col"
+                  class="border-b border-gray-200 px-5 py-3 text-left text-sm font-normal uppercase"
+                >
+                  Gender
+                </th>
+                <th
+                  scope="col"
+                  class="border-b border-gray-200 px-5 py-3 text-left text-sm font-normal uppercase"
+                >
+                  Status
+                </th>
+                <th
+                  scope="col"
+                  class="border-b border-gray-200 px-5 py-3 text-left text-sm font-normal uppercase"
+                >
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of filteredUsers">
+                <td class="border-b border-gray-200 p-5 text-sm">
+                  {{ user.id_User }}
+                </td>
+                <td class="border-b border-gray-200 p-5 text-sm">
+                  <div class="flex items-center">
+                    <div class="shrink-0">
+                      <a href="#" class="relative block">
+                        <img
+                          alt="profil"
+                          [src]="
+                            user.photo ||
+                            'https://lh3.googleusercontent.com/a/ACg8ocJw3qmdFrhQFUXJ4fdHMSfU7bRoZPmDm4V4muaT8jcvTSWkQQ=s96-c'
+                          "
+                          class="mx-auto h-10 w-10 rounded-full object-cover"
+                        />
+                      </a>
+                    </div>
+                  </div>
+                </td>
+                <td class="border-b border-gray-200 p-5 text-sm">
+                  {{ user.first_Name }}
+                </td>
+                <td class="border-b border-gray-200 p-5 text-sm">
+                  {{ user.last_Name }}
+                </td>
+                <td class="border-b border-gray-200 p-5 text-sm">
+                  {{ user.role }}
+                </td>
+                <td class="border-b border-gray-200 p-5 text-sm">
+                  {{ user.email }}
+                </td>
+                <td class="border-b border-gray-200 p-5 text-sm">
+                  {{ user.gender || "N/A" }}
+                </td>
+                <td class="border-b border-gray-200 p-5 text-sm">
+                  <span
+                    class="relative inline-block px-3 py-1 font-semibold leading-tight"
+                    [ngClass]="{
+                      'text-green-900': user.is_Activated,
+                      'text-red-900': !user.is_Activated
+                    }"
+                  >
+                    <span
+                      aria-hidden="true"
+                      class="absolute inset-0 rounded-full opacity-50"
+                      [ngClass]="{
+                        'bg-green-200': user.is_Activated,
+                        'bg-red-200': !user.is_Activated
+                      }"
+                    >
+                    </span>
+                    <span class="relative">{{
+                      user.is_Activated ? "active" : "inactive"
+                    }}</span>
+                  </span>
+                </td>
+                <td class="border-b border-gray-200 p-5 text-sm">
+                  <div class="flex items-center space-x-2">
+                    <!-- View Details Button -->
+                    <span
+                      class="relative inline-block px-3 py-1 font-semibold leading-tight text-gray-700 cursor-pointer hover:bg-gray-100 rounded-full"
+                      (click)="openDetailsModal(user)"
+                    >
+                      <span
+                        aria-hidden="true"
+                        class="absolute inset-0 rounded-full bg-gray-200 opacity-50"
+                      ></span>
+                      <span class="relative">View Details</span>
+                    </span>
+
+                    <!-- Delete Button -->
+                    <span
+                      class="relative inline-block px-3 py-1 font-semibold leading-tight text-gray-700 cursor-pointer hover:bg-gray-100 rounded-full"
+                      (click)="deleteUser(user.id_User!)"
+                    >
+                      <span
+                        aria-hidden="true"
+                        class="absolute inset-0 rounded-full bg-gray-200 opacity-50"
+                      ></span>
+                      <span class="relative">Delete</span>
+                    </span>
+
+                    <!-- Ban/Unban Button -->
+                    <span
+                      class="relative inline-block px-3 py-1 font-semibold leading-tight rounded-full cursor-pointer"
+                      [ngClass]="{
+                        'text-gray-700 hover:bg-gray-100': user.is_Activated,
+                        'text-gray-500 hover:bg-gray-50': !user.is_Activated
+                      }"
+                    >
+                      <span
+                        aria-hidden="true"
+                        class="absolute inset-0 rounded-full opacity-50"
+                        [ngClass]="{
+                          'bg-gray-300': user.is_Activated,
+                          'bg-gray-200': !user.is_Activated
+                        }"
+                      ></span>
+                      <span class="relative">{{
+                        user.is_Activated ? "Ban" : "Unban"
+                      }}</span>
+                    </span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- User Details Modal -->
+<div
+  *ngIf="selectedUser"
+  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 backdrop-blur-sm"
+>
+  <div
+    class="bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 hover:scale-100"
+    style="background-color: rgba(158, 158, 158, 0.3)"
+  >
+    <!-- Modal Header -->
+    <div
+      class="sticky top-0 bg-gradient-to-r from-purple-600 to-blue-500 text-white p-6 rounded-t-xl flex justify-between items-center"
+    >
+      <h2 class="text-2xl font-bold flex items-center">
+        <i class="bi bi-person-badge-fill mr-2"></i>
+        User Profile
+      </h2>
+      <button
+        (click)="selectedUser = null"
+        class="text-white hover:text-gray-200 transition"
+      >
+        <i class="bi bi-x-lg text-2xl"></i>
+      </button>
+    </div>
+
+    <!-- Modal Body -->
+    <div class="p-6">
+      <div class="flex flex-col md:flex-row gap-8">
+        <!-- User Photo Section -->
+        <div class="w-full md:w-1/3 flex flex-col items-center">
+          <div class="relative mb-4">
+            <img
+              [src]="
+                selectedUser.photo ||
+                'https://res.cloudinary.com/beloved/image/upload/v1623196231/Assets/person/6_v4ytve.jpg'
+              "
+              alt="User Photo"
+              class="w-40 h-40 rounded-full object-cover border-4 border-white shadow-lg"
+            />
+            <div
+              class="absolute -bottom-2 -right-2 bg-white rounded-full p-1 shadow"
+            >
+              <span
+                [class]="
+                  'status-dot ' +
+                  (selectedUser.is_Activated ? 'bg-green-500' : 'bg-red-500')
+                "
+              ></span>
+            </div>
+          </div>
+          <h3 class="text-xl font-bold text-center text-gray-800">
+            {{ selectedUser.first_Name }} {{ selectedUser.last_Name }}
+          </h3>
+          <p class="text-blue-600 font-medium">
+            {{ selectedUser.role || "No role specified" }}
+          </p>
+
+          <div class="mt-4 flex space-x-3">
+            <button
+              class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm flex items-center"
+            >
+              <i class="bi bi-envelope-fill mr-1"></i> Message
+            </button>
+            <button
+              class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm flex items-center"
+            >
+              <i class="bi bi-telephone-fill mr-1"></i> Call
+            </button>
+          </div>
+        </div>
+
+        <!-- User Details Section -->
+        <div class="w-full md:w-2/3">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Personal Info -->
+            <div
+              class="bg-gray-50 p-4 rounded-lg"
+              style="background-color: rgba(147, 145, 145, 0.929)"
+            >
+              <h4 class="font-semibold text-gray-700 mb-3 flex items-center">
+                <i class="bi bi-person-lines-fill text-purple-500 mr-2"></i>
+                Personal Information
+              </h4>
+              <div class="space-y-3">
+                <div>
+                  <label class="font-medium">Full Name</label>
+                  <p class="text-sm text-white-800">
+                    {{ selectedUser.first_Name }} {{ selectedUser.last_Name }}
+                  </p>
+                </div>
+                <div>
+                  <label class="font-medium">Gender</label>
+                  <p class="text-sm text-white-800">
+                    {{ selectedUser.gender || "Not specified" }}
+                  </p>
+                </div>
+                <div>
+                  <label class="font-medium">Date of Birth</label>
+                  <p class="text-sm text-white-800">
+                    {{ selectedUser.date_Birthday | date : "dd/MM/yyyy" }}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div
+              class="bg-gray-50 p-4 rounded-lg"
+              style="background-color: rgba(147, 145, 145, 0.929)"
+            >
+              <h4 class="font-semibold text-gray-700 mb-3 flex items-center">
+                <i class="bi bi-telephone-fill text-blue-500 mr-2"></i>
+                Contact Information
+              </h4>
+              <div class="space-y-3">
+                <div>
+                  <label class="font-medium">Email</label>
+                  <p class="text-sm text-white-8000">
+                    {{ selectedUser.email }}
+                  </p>
+                </div>
+                <div>
+                  <label class="font-medium">Phone</label>
+                  <p class="text-sm text-white-800">
+                    {{ selectedUser.phone_Number || "Not specified" }}
+                  </p>
+                </div>
+                <div>
+                  <label class="font-medium">Address</label>
+                  <p class="text-sm text-white-800">
+                    {{ selectedUser.address || "Not specified" }}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Account Info -->
+            <div
+              class="bg-gray-50 p-4 rounded-lg"
+              style="background-color: rgba(147, 145, 145, 0.929)"
+            >
+              <h4 class="font-semibold text-gray-700 mb-3 flex items-center">
+                <i class="bi bi-shield-lock-fill text-green-500 mr-2"></i>
+                Account Information
+              </h4>
+              <div class="space-y-3">
+                <div>
+                  <label class="font-medium">User ID</label>
+                  <p class="text-sm text-white-800">
+                    {{ selectedUser.id_User }}
+                  </p>
+                </div>
+                <div>
+                  <label class="font-medium">Status</label> &nbsp;&nbsp;
+
+                  <span
+                    [class]="
+                      'px-2 py-1 rounded-full text-xs font-medium ' +
+                      (selectedUser.is_Activated
+                        ? 'bg-green-100 text-green-800'
+                        : 'bg-red-100 text-red-800')
+                    "
+                  >
+                    {{ selectedUser.is_Activated ? "Active" : "Inactive" }}
+                  </span>
+                </div>
+                <div>
+                  <label class="font-medium">Member Since</label>
+                  <p class="text-sm text-white-800">
+                    {{ selectedUser.created_At | date : "dd/MM/yyyy" }}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Additional Info -->
+            <div
+              class="bg-gray-50 p-4 rounded-lg"
+              style="background-color: rgba(147, 145, 145, 0.929)"
+            >
+              <h4 class="font-semibold text-gray-700 mb-3 flex items-center">
+                <i class="bi bi-info-circle-fill text-yellow-500 mr-2"></i>
+                Additional Information
+              </h4>
+              <div class="space-y-3">
+                <div>
+                  <label class="font-medium">Role</label>
+                  <span
+                    class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs font-medium"
+                  >
+                    {{ selectedUser.role || "No role" }}
+                  </span>
+                </div>
+                <div>
+                  <label class="font-medium">Last Activity</label>
+                  <p class="text-sm text-white-800">2 hours ago</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="mt-6 flex justify-end space-x-3 border-t pt-4">
+        <span
+          class="relative inline-block px-3 py-1 font-semibold leading-tight text-gray-700 cursor-pointer hover:bg-gray-100 rounded-full"
+          (click)="selectedUser = null"
+        >
+          <span
+            aria-hidden="true"
+            class="absolute inset-0 rounded-full bg-gray-200 opacity-50"
+          ></span>
+          <span class="relative">Close</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

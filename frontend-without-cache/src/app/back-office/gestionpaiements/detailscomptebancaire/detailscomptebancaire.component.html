@@ -1,0 +1,58 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card border-0 shadow rounded-4 custom-card">
+        <div
+          class="card-header text-white text-center py-4 gradient-header rounded-top-4"
+        >
+          <h3 class="mb-0">💳 Bank Account Details</h3>
+        </div>
+        <div class="card-body p-4">
+          <!-- Account Holder -->
+          <div class="mb-4">
+            <h5 class="section-title">👤 Account Holder Information</h5>
+            <div class="ps-3">
+              <p>
+                <strong>Full Name:</strong>
+                {{ comptebancaire.user.first_Name }}
+                {{ comptebancaire.user.last_Name }}
+              </p>
+              <p><strong>Email:</strong> {{ comptebancaire.user.email }}</p>
+              <p>
+                <strong>Phone:</strong> {{ comptebancaire.user.phone_Number }}
+              </p>
+            </div>
+          </div>
+
+          <!-- Account Info -->
+          <div class="mb-4">
+            <h5 class="section-title">🏦 Account Information</h5>
+            <div class="ps-3">
+              <p>
+                <strong>Balance:</strong>
+                <span class="text-success fw-bold"
+                  >{{ comptebancaire.montant }} TND</span
+                >
+              </p>
+            </div>
+          </div>
+
+          <!-- QR Code -->
+          <div class="text-center my-4">
+            <qrcode [qrdata]="getQRCodeData(comptebancaire)"></qrcode>
+            <p class="text-muted mt-2">📱 Scan this QR Code for account info</p>
+          </div>
+
+          <div class="text-center">
+            <a
+              class="btn btn-outline-pink px-4 py-2 rounded-pill shadow-sm"
+              routerLink="admin/listcomptebancaire"
+            >
+              <i class="fas fa-arrow-left me-2"></i>Back to Account List
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

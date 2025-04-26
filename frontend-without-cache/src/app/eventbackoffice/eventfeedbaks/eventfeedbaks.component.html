@@ -1,0 +1,25 @@
+<div class="feedback-container">
+  <h2 class="section-title text-center">📝 Feedbacks for this Event</h2>
+
+  <div *ngIf="feedbacks.length > 0; else noFeedback">
+    <div *ngFor="let fb of feedbacks" class="feedback-card shadow-sm">
+      <ng-container *ngIf="fb.feedbackId && feedbackUsers[fb.feedbackId] as user">
+        <div class="user-info">
+          <h4 class="user-name">👤 {{ user.first_Name }} {{ user.last_Name }}</h4>
+          <p class="user-id">🆔 User ID: {{ user.id_User }}</p>
+        </div>
+      </ng-container>
+
+      <p class="feedback-rating"><strong>⭐ Rating:</strong> {{ fb.eventRating }}</p>
+      <p class="feedback-comment"><strong>🗨️ Comment:</strong> {{ fb.comment }}</p>
+    </div>
+  </div>
+
+  <ng-template #noFeedback>
+    <p class="no-feedback-msg">No feedback available for this event.</p>
+  </ng-template>
+</div>
+
+<div class="return-btn-wrapper">
+  <button class="btn return-btn" routerLink="/admin/event">Return</button>
+</div><br><br>

@@ -1,0 +1,44 @@
+<div class="review-container">
+    <h2>📋  List of Reviews</h2>
+    <table class="review-table">
+      <thead>
+        <tr>
+          <th>✍️ Content</th>
+          <th>⭐ Assessment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let review of reviews">
+          <td>{{ review.content }}</td>
+          <td>
+            <span *ngFor="let star of getStars(review.rating)" class="star">★</span>
+            <span *ngFor="let star of getStars(5 - review.rating)" class="star empty">☆</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- Lien pour afficher la moyenne -->
+<div class="average-section">
+    <a href="#" (click)="getAverageRating(); $event.preventDefault()">📈% Show average reviews</a>
+  
+    
+    <div *ngIf="showAverage" class="average-result">
+        Average rating : 
+        <ng-container *ngFor="let star of getFullStars(averageRating)">
+          <span class="star">★</span>
+        </ng-container>
+        <ng-container *ngIf="hasHalfStar(averageRating)">
+          <span class="star half">★</span>
+        </ng-container>
+        <ng-container *ngFor="let star of getEmptyStars(averageRating)">
+          <span class="star empty">☆</span>
+        </ng-container>
+        <span class="avg-text">({{ averageRating | number:'1.1-2' }})</span>
+      </div>
+      
+
+
+  </div>
+  
+  </div>
+  
