@@ -1,0 +1,147 @@
+/* General Styles */
+.container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Search Input */
+.search-input {
+  width: 100%;
+  padding: 12px 25px; /* Matches button padding proportion */
+  border-radius: 30px; /* Consistent with buttons */
+  border: 1px solid #f0c6e0;
+  background-color: #fdf2f9;
+  font-size: 1rem; /* Matches button font size */
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  height: 40px; /* Explicit height for consistency */
+  box-sizing: border-box; /* Ensures padding is included in height */
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #e83e8c;
+  box-shadow: 0 2px 10px rgba(232, 62, 140, 0.2);
+  background-color: white;
+}
+
+/* Buttons */
+.btn {
+  border-radius: 25px;
+  padding: 8px 20px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: none;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+.btn-add {
+  background: linear-gradient(135deg, #ff6b9a 0%, #ff8e53 100%);
+  color: white;
+  box-shadow: 0 4px 6px rgba(255, 107, 154, 0.2);
+  padding: 9px 15px; /* Even larger padding */
+  font-size: 1rem; /* Larger font */
+  border-radius: 35px; /* More rounded */
+  min-width: 100px; /* Minimum width */
+  width: 175px;
+}
+
+.btn-top {
+  background: linear-gradient(135deg, #ff6b9a 0%, #ff8e53 100%);
+  color: white;
+  box-shadow: 0 4px 6px rgba(255, 107, 154, 0.2);
+}
+
+.btn-add:hover, .btn-top:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(255, 107, 154, 0.3);
+}
+
+/* Card Styles */
+.custom-card {
+  background-color: rgba(204, 204, 204, 0.218);
+  border-radius: 15px;
+  border: none;
+  height: 100px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(232, 62, 140, 0.1);
+}
+
+.custom-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(232, 62, 140, 0.15);
+}
+
+.card-img-top {
+  height: 250px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.card-body {
+  padding: 10px;
+}
+
+.event-name {
+  font-size: 1.4rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.event-text {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+/* Card Buttons */
+.card-btn {
+  background: linear-gradient(135deg, #ff87bf 0%, #cb9bff 100%);
+  color: white !important;
+  font-size: 12px;
+  margin: 1px;
+  min-width: 80px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 11px;
+  padding-bottom: 11px;
+
+  box-shadow: 0 2px 5px rgba(106, 17, 203, 0.2);
+}
+
+.card-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(106, 17, 203, 0.3);
+  opacity: 0.9;
+}
+
+/* Alert */
+.fixed-top-alert {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1050;
+  width: auto;
+  max-width: 90%;
+  border-radius: 10px;
+  background-color: #fff3f8;
+  border: 1px solid #ffcce6;
+  color: #d63384;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .card-btn {
+      min-width: 80px;
+      font-size: 0.7rem;
+      padding: 5px 10px;
+  }
+  
+  .btn-add, .btn-top {
+      padding: 6px 12px;
+      font-size: 0.7rem;
+  }
+}
