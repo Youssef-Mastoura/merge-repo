@@ -1,0 +1,770 @@
+<div class="main-container px-15 px-md-17 px-lg-4 py-5">
+  <!-- Ajout de py-5 -->
+
+  <!-- Enhanced Header -->
+  <div class="header-container mb-5 mx-1 mx-md-8">
+    <!-- Augmentation du mb-3 à mb-5 -->
+    <div
+      class="header d-flex flex-wrap justify-content-between align-items-center py-3 px-2 px-md-3"
+    >
+      <div class="header-title">
+        <h1 class="fw-bold mb-1">
+          <i class="bi bi-book-half header-icon me-2"></i>
+          <span class="title-text"> My Courses</span>
+          <span class="badge course-count ms-2"
+            >{{ filteredCourses.length }} courses</span
+          >
+        </h1>
+        <p class="header-subtitle mb-0 ps-1 text-muted">
+          Manage and organize all your courses in one place
+        </p>
+      </div>
+
+      <div
+        class="header-actions d-flex align-items-center gap-3 flex-wrap mt-3 mt-md-0"
+      >
+        <!-- Section My Enrolled Courses -->
+        <div
+          class="btn-group me-2 course-view-toggle mb-4"
+          role="group"
+          aria-label="Course view toggle"
+        >
+          <button
+            type="button"
+            class="btn"
+            [class.active]="showMyCourses"
+            (click)="showMyCourses = true"
+          >
+            <i class="bi bi-bookmark-check-fill me-1"></i> My Enrolled Courses
+          </button>
+          <button
+            type="button"
+            class="btn"
+            [class.active]="!showMyCourses"
+            (click)="showMyCourses = false"
+          >
+            <i class="bi bi-journal-text me-1"></i> Available Courses
+          </button>
+        </div>
+
+        <!-- Enhanced Search Bar -->
+        <div class="search-wrapper me-2">
+          <div class="input-group search-bar py-1">
+            <span class="input-group-text bg-transparent border-0 ps-3">
+              <i class="bi bi-search"></i>
+            </span>
+            <input
+              type="text"
+              class="form-control ps-2 border-0"
+              placeholder="Search courses..."
+              [(ngModel)]="searchQuery"
+              (input)="onSearch()"
+              aria-label="Search courses"
+            />
+            <button class="btn search-btn px-3" aria-label="Execute search">
+              <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Enhanced Sorting Dropdown -->
+        <div class="dropdown sort-dropdown me-2">
+          <button
+            class="btn dropdown-toggle px-3"
+            type="button"
+            id="sortDropdown"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="bi bi-sort-down me-1"></i>
+            <span class="d-none d-md-inline">{{
+              getSortLabel() || "Sort by"
+            }}</span>
+          </button>
+          <ul class="dropdown-menu p-2" aria-labelledby="sortDropdown">
+            <li>
+              <a class="dropdown-item py-2 px-3" (click)="setSortOption('')"
+                ><i class="bi bi-x-circle me-2"></i>Default</a
+              >
+            </li>
+            <li><hr class="dropdown-divider my-1" /></li>
+            <li>
+              <a
+                class="dropdown-item py-2 px-3"
+                (click)="setSortOption('price')"
+                ><i class="bi bi-currency-euro me-2"></i>Price (low to high)</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item py-2 px-3"
+                (click)="setSortOption('duration')"
+                ><i class="bi bi-clock me-2"></i>Duration (short to long)</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item py-2 px-3"
+                (click)="setSortOption('rating')"
+                ><i class="bi bi-star me-2"></i>Rating (high to low)</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filter Section -->
+  <div class="filter-section bg-light rounded-3 p-4 mb-5 mx-2 mx-md-3">
+    <!-- mb-4 → mb-5 -->
+    <div
+      class="d-flex flex-wrap justify-content-between align-items-center mb-3"
+    >
+      <h5 class="fw-semibold mb-0">
+        <i class="bi bi-funnel me-2"></i>Filter by category
+      </h5>
+    </div>
+
+    <!-- Category List -->
+    <div class="d-flex flex-wrap align-items-center mb-3 gap-2">
+      <button
+        class="btn category-btn rounded-pill px-3 py-1 me-2 mb-2"
+        (click)="filteredCourses = allCourses"
+      >
+        <i class="bi bi-grid me-1"></i> All courses
+      </button>
+      <button
+        *ngFor="let category of categories; trackBy: trackByCategory"
+        class="btn category-btn rounded-pill px-3 py-1 me-2 mb-2"
+        (click)="filterByCategory(category.name_Category)"
+      >
+        <i class="bi bi-tag-fill me-1"></i> {{ category.name_Category }}
+      </button>
+      <span *ngIf="categories.length === 0" class="text-muted ms-2"
+        >No categories available</span
+      >
+    </div>
+
+    <!-- Advanced Filters -->
+    <div class="d-flex flex-wrap align-items-center gap-4 mb-2 pt-2">
+      <div class="form-check d-flex align-items-center me-4">
+        <input
+          class="form-check-input me-2"
+          type="checkbox"
+          id="filterOnline"
+          [(ngModel)]="filterOnline"
+          (change)="applyAdvancedFilters()"
+        />
+        <label class="form-check-label" for="filterOnline">
+          <i class="fas fa-laptop-house me-2"></i> Online
+        </label>
+      </div>
+
+      <div class="form-check d-flex align-items-center">
+        <input
+          class="form-check-input me-2"
+          type="checkbox"
+          id="filterLive"
+          [(ngModel)]="filterLive"
+          (change)="applyAdvancedFilters()"
+        />
+        <label class="form-check-label" for="filterLive">
+          <i class="fas fa-video me-2"></i> Live
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bouton pour accéder au calendrier -->
+  <div class="text-center mb-5">
+    <button class="btn btn-lg btn-mauve my-4" (click)="scrollToCalendar()">
+      <i class="bi bi-calendar3 me-2"></i> Accéder à mon calendrier de cours
+    </button>
+  </div>
+
+  <!-- Status Sections -->
+  <div class="status-sections mb-5">
+    <!-- Loader -->
+    <div *ngIf="loading" class="text-center my-5 py-5">
+      <div class="spinner-border" role="status" aria-label="Loading">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p class="mt-3 text-muted">Loading your courses...</p>
+    </div>
+
+    <!-- Error -->
+    <div
+      *ngIf="error"
+      class="alert alert-danger rounded-3 mb-4 p-3 mx-2 mx-md-3"
+    >
+      <div class="d-flex align-items-center">
+        <i class="bi bi-exclamation-triangle-fill me-3"></i>
+        <div><strong>Error:</strong> {{ error }}</div>
+      </div>
+    </div>
+
+    <!-- No Courses -->
+    <div
+      *ngIf="!loading && !error && filteredCourses.length === 0"
+      class="alert alert-warning rounded-3 text-center p-3 mx-2 mx-md-3"
+    >
+      <i class="bi bi-info-circle-fill me-2"></i>
+      You haven't created any courses yet. Click "New Course" to get started.
+    </div>
+  </div>
+
+  <!-- Course List -->
+
+  <div class="mb-5" *ngIf="showMyCourses">
+    <div class="mb-5">
+      <div
+        class="section-header d-flex align-items-center gap-2 px-3 py-2 rounded-top custom-header"
+      >
+        <i class="bi bi-bookmark-check-fill fs-3"></i>
+        <h2 class="mb-0">My Enrolled Courses</h2>
+      </div>
+
+      <div *ngIf="loading" class="text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+
+      <div
+        *ngIf="!loading && enrolledCourses.length === 0"
+        class="alert alert-info"
+      >
+        <i class="bi bi-info-circle-fill me-2"></i>You are not enrolled in any
+        courses yet.
+      </div>
+
+      <div class="row g-5 mb-5 mx-1 mx-md-2">
+        <div
+          class="col-md-6 col-lg-4"
+          *ngFor="let course of enrolledCourses; trackBy: trackByCourse"
+        >
+          <div class="course-card h-100 p-3">
+            <div class="card-img-top position-relative">
+              <img
+                *ngIf="course.image_Course"
+                [src]="course.image_Course"
+                alt="Course image {{ course.title_Course }}"
+                class="img-fluid w-100 h-100 object-fit-cover"
+              />
+              <div
+                *ngIf="!course.image_Course"
+                class="d-flex flex-column align-items-center justify-content-center h-100 text-muted p-4"
+              >
+                <i class="bi bi-image fs-1"></i>
+                <small>No image</small>
+              </div>
+              <span
+                class="position-absolute top-0 end-0 m-3 badge bg-white text-dark"
+              >
+                {{ course.courseType === "ONLINE" ? "Online" : "Live" }}
+              </span>
+            </div>
+
+            <div class="card-body p-3">
+              <div
+                class="d-flex justify-content-between align-items-start mb-3"
+              >
+                <h5 class="card-title mb-0">{{ course.title_Course }}</h5>
+                <span class="badge bg-light text-dark ms-2">{{
+                  course.language_Course
+                }}</span>
+              </div>
+
+              <p class="card-text text-truncate-3 mb-3">
+                {{ course.description_Course }}
+              </p>
+
+              <div class="course-info mb-3">
+                <span class="me-3"
+                  ><i class="bi bi-clock me-1"></i>
+                  {{ course.duration_Course }}h</span
+                >
+                <span
+                  ><i class="bi bi-currency-euro me-1"></i>
+                  {{ course.price_Course }}</span
+                >
+              </div>
+
+              <div class="mb-3">
+                <span class="badge p-2">{{ course.name_Category }}</span>
+              </div>
+
+              <!-- Rating -->
+              <div class="rating d-flex align-items-center gap-1 mb-3">
+                <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                  <i
+                    class="bi"
+                    [ngClass]="{
+                      'bi-star-fill text-warning':
+                        hoveredRating >= star ||
+                        ((course.rating_Course ?? 0) >= star &&
+                          hoveredRating === 0),
+                      'bi-star text-secondary':
+                        hoveredRating < star &&
+                        (course.rating_Course ?? 0) < star
+                    }"
+                    (mouseenter)="hoveredRating = star"
+                    (mouseleave)="hoveredRating = 0"
+                    (click)="onRate(course, star)"
+                    [attr.aria-label]="'Rate ' + star + ' stars'"
+                    role="button"
+                  ></i>
+                </ng-container>
+                <small class="ms-2 text-muted"
+                  >({{ course.rating_Course ?? 0 }}/5)</small
+                >
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="card-footer p-3">
+                <div class="d-flex justify-content-between gap-2">
+                  <button
+                    class="btn action-btn btn-contents px-3"
+                    (click)="onManageContents(course.id_Course!)"
+                    aria-label="Manage contents"
+                  >
+                    <i class="bi bi-list-check me-1"></i>
+                    <span class="d-none d-md-inline">Contents</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- AFFICHAGE DES COURS NONINSCRITS -->
+  <div *ngIf="!showMyCourses">
+    <div class="mb-5">
+      <div
+        class="section-header d-flex align-items-center gap-2 px-3 py-2 rounded-top custom-header"
+      >
+        <i class="bi bi-journal-text fs-3"></i>
+        <h2 class="mb-0">Available Courses</h2>
+      </div>
+
+      <div *ngIf="!loading && allCourses.length === 0" class="alert alert-info">
+        <i class="bi bi-info-circle-fill me-2"></i>No available courses at the
+        moment.
+      </div>
+      <div
+        *ngIf="!loading && !error && filteredCourses.length > 0"
+        class="row g-5 mb-4 mx-1 mx-md-2"
+      >
+        <div
+          class="col-md-6 col-lg-4"
+          *ngFor="let course of paginatedCourses; trackBy: trackByCourse"
+        >
+          <div class="course-card h-100">
+            <div class="card-img-top position-relative">
+              <img
+                *ngIf="course.image_Course"
+                [src]="course.image_Course"
+                alt="Course image {{ course.title_Course }}"
+                class="img-fluid w-100 h-100 object-fit-cover"
+              />
+              <div
+                *ngIf="!course.image_Course"
+                class="d-flex flex-column align-items-center justify-content-center h-100 text-muted p-4"
+              >
+                <i class="bi bi-image fs-1"></i>
+                <small>No image</small>
+              </div>
+              <span
+                class="position-absolute top-0 end-0 m-3 badge bg-white text-dark"
+              >
+                {{ course.courseType === "ONLINE" ? "Online" : "Live" }}
+              </span>
+            </div>
+
+            <div class="card-body p-3">
+              <div
+                class="d-flex justify-content-between align-items-start mb-3"
+              >
+                <h5 class="card-title mb-0">{{ course.title_Course }}</h5>
+                <span class="badge bg-light text-dark ms-2">{{
+                  course.language_Course
+                }}</span>
+              </div>
+
+              <p class="card-text text-truncate-3 mb-3">
+                {{ course.description_Course }}
+              </p>
+
+              <div class="course-info mb-3">
+                <span class="me-3"
+                  ><i class="bi bi-clock me-1"></i>
+                  {{ course.duration_Course }}h</span
+                >
+                <span
+                  ><i class="bi bi-currency-euro me-1"></i>
+                  {{ course.price_Course }}</span
+                >
+              </div>
+
+              <div class="mb-3">
+                <span class="badge p-2">{{ course.name_Category }}</span>
+              </div>
+
+              <!-- Rating -->
+              <span class="badge bg-warning text-dark">
+                <i class="bi bi-star-fill"></i>
+                {{ course.rating_Course || "Nouveau" }}
+              </span>
+            </div>
+            <button
+              (click)="gotoReserve(course.id_Course)"
+              class="btn px-4 py-2 d-flex align-items-center gap-2 text-white fw-semibold rounded-pill"
+              style="
+                background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+                border: none;
+                box-shadow: 0 4px 12px rgba(161, 140, 209, 0.5);
+              "
+              aria-label="Reserve this course"
+            >
+              <i class="bi bi-stars fs-5"></i>
+              <span class="d-none d-md-inline">Reserve this course</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div
+      *ngIf="!loading && !error && filteredCourses.length > 0"
+      class="d-flex justify-content-center mt-4 mb-5 mx-2 mx-md-3"
+    >
+      <nav aria-label="Course pagination">
+        <ul class="pagination">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <button
+              class="page-link px-3 py-2"
+              (click)="goToPage(currentPage - 1)"
+              [disabled]="currentPage === 1"
+              aria-label="Previous page"
+            >
+              <i class="bi bi-chevron-left"></i>
+            </button>
+          </li>
+          <li
+            class="page-item mx-1"
+            *ngFor="let page of pages"
+            [class.active]="page === currentPage"
+          >
+            <button
+              class="page-link px-3 py-2"
+              (click)="goToPage(page)"
+              [attr.aria-label]="'Go to page ' + page"
+            >
+              {{ page }}
+            </button>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <button
+              class="page-link px-3 py-2"
+              (click)="goToPage(currentPage + 1)"
+              [disabled]="currentPage === totalPages"
+              aria-label="Next page"
+            >
+              <i class="bi bi-chevron-right"></i>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- FAQ Section -->
+  <div class="faq-section bg-light rounded-3 p-5 mb-5 mx-2 mx-md-3">
+    <!-- p-4 → p-5 -->
+    <h2 class="fw-bold mb-4">
+      <i class="bi bi-question-circle me-2"></i> Frequently Asked Questions
+    </h2>
+
+    <div class="accordion" id="faqAccordion">
+      <!-- Question 1 -->
+      <div class="accordion-item border-0 mb-3">
+        <h3 class="accordion-header" id="headingOne">
+          <button
+            class="accordion-button collapsed rounded-3 p-3"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseOne"
+            aria-expanded="false"
+            aria-controls="collapseOne"
+          >
+            <i class="bi bi-bookmark-plus me-2"></i> How do I create a new
+            course?
+          </button>
+        </h3>
+        <div
+          id="collapseOne"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingOne"
+          data-bs-parent="#faqAccordion"
+        >
+          <div class="accordion-body p-3">
+            To create a new course, click on the "New Course" button in the
+            header. You'll be guided through a simple process to set up your
+            course details, including title, description, and pricing. You can
+            add content after creating the initial course framework.
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="accordion-item border-0 mb-3">
+        <h3 class="accordion-header" id="headingTwo">
+          <button
+            class="accordion-button collapsed rounded-3 p-3"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseTwo"
+            aria-expanded="false"
+            aria-controls="collapseTwo"
+          >
+            <i class="bi bi-people me-2"></i> How do students enroll in my
+            courses?
+          </button>
+        </h3>
+        <div
+          id="collapseTwo"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingTwo"
+          data-bs-parent="#faqAccordion"
+        >
+          <div class="accordion-body p-3">
+            Once you publish your course, it becomes visible in the platform's
+            marketplace. Students can browse courses, view details, and enroll
+            directly. You'll receive notifications when new students enroll and
+            can track their progress.
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 3 -->
+      <div class="accordion-item border-0 mb-3">
+        <h3 class="accordion-header" id="headingThree">
+          <button
+            class="accordion-button collapsed rounded-3 p-3"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseThree"
+            aria-expanded="false"
+            aria-controls="collapseThree"
+          >
+            <i class="bi bi-cash-coin me-2"></i> How do I get paid for my
+            courses?
+          </button>
+        </h3>
+        <div
+          id="collapseThree"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingThree"
+          data-bs-parent="#faqAccordion"
+        >
+          <div class="accordion-body p-3">
+            Payments are processed automatically by our platform. You'll receive
+            earnings through your preferred payment method (PayPal, bank
+            transfer, etc.) on a monthly basis. Our standard revenue share is
+            70% to instructors, with detailed reports available in your
+            dashboard.
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 4 -->
+      <div class="accordion-item border-0 mb-3">
+        <h3 class="accordion-header" id="headingFour">
+          <button
+            class="accordion-button collapsed rounded-3 p-3"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseFour"
+            aria-expanded="false"
+            aria-controls="collapseFour"
+          >
+            <i class="bi bi-pencil-square me-2"></i> Can I edit my course after
+            publishing?
+          </button>
+        </h3>
+        <div
+          id="collapseFour"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingFour"
+          data-bs-parent="#faqAccordion"
+        >
+          <div class="accordion-body p-3">
+            Yes, you can update your course content at any time. Simply click
+            the "Edit" button on your course card. Major changes may require
+            re-review if they significantly alter the course content. Current
+            students will be notified of significant updates.
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 5 -->
+      <div class="accordion-item border-0">
+        <h3 class="accordion-header" id="headingFive">
+          <button
+            class="accordion-button collapsed rounded-3 p-3"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseFive"
+            aria-expanded="false"
+            aria-controls="collapseFive"
+          >
+            <i class="bi bi-bar-chart me-2"></i> How can I track my course
+            performance?
+          </button>
+        </h3>
+        <div
+          id="collapseFive"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingFive"
+          data-bs-parent="#faqAccordion"
+        >
+          <div class="accordion-body p-3">
+            Your instructor dashboard provides comprehensive analytics
+            including:
+            <ul class="mt-2">
+              <li>Enrollment numbers over time</li>
+              <li>Student completion rates</li>
+              <li>Revenue reports</li>
+              <li>Student ratings and feedback</li>
+            </ul>
+            Use these insights to improve your course content and marketing.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Section Cours Populaires -->
+  <section class="popular-section">
+    <div class="course-card h-100">
+      <!-- En-tête -->
+      <div class="popular-header">
+        <h2 class="display-7 fw-bold">Cours Tendances</h2>
+        <p class="lead">Découvrez nos formations les plus suivies</p>
+      </div>
+
+      <!-- Liste des cours horizontale -->
+      <div class="d-flex flex-nowrap overflow-auto pb-8">
+        <div
+          class="d-inline-block me-8"
+          *ngFor="let course of popularCourses"
+          style="width: 300px"
+        >
+          <div class="popular-course-card card h-100">
+            <!-- Image du cours -->
+            <div class="card-img-container">
+              <img
+                [src]="course.image_Course || 'assets/default-course.jpg'"
+                class="img-fluid"
+                alt="{{ course.title_Course }}"
+              />
+              <span class="popular-badge">
+                <i class="bi bi-lightning-charge-fill"></i> Populaire
+              </span>
+              <span class="view-count">
+                <i class="bi bi-eye-fill"></i> {{ course.viewedCount || 0 }}
+              </span>
+            </div>
+
+            <!-- Corps de la carte -->
+            <div class="card-body">
+              <h5 class="card-title">{{ course.title_Course }}</h5>
+              <p class="card-text text-muted">
+                {{ course.description_Course }}
+              </p>
+            </div>
+
+            <!-- Pied de carte -->
+            <div class="card-footer bg-transparent">
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="badge bg-warning text-dark">
+                  <i class="bi bi-star-fill"></i>
+                  {{ course.rating_Course || "Nouveau" }}
+                </span>
+                <span class="text-muted small">
+                  <i class="bi bi-clock"></i> {{ course.duration_Course }}h
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container my-4">
+      <!-- Section Calendrier -->
+      <section
+        id="calendar"
+        class="calendar-section bg-light rounded-4 p-5 shadow-sm mb-5"
+      >
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <!--<button class="btn btn-sm btn-outline-primary" (click)="syncWithGoogle()">
+        <i class="btn btn-lg btn-mauve my-4"></i> Synchroniser
+      </button>*/!-->
+        </div>
+
+        <!-- Calendrier principal -->
+        <div class="calendar-container mb-4">
+          <full-calendar
+            *ngIf="calendarVisible"
+            [options]="calendarOptions"
+            [events]="calendarEvents"
+            (eventClick)="handleEventClick($event)"
+            (dateClick)="handleDateClick($event)"
+          >
+          </full-calendar>
+        </div>
+
+        <!-- Liste des événements à venir -->
+        <div class="upcoming-events">
+          <h5 class="fw-semibold mb-3 text-secondary">
+            <i class="bi bi-alarm me-2"></i> Échéances à venir
+          </h5>
+          <div class="list-group">
+            <div
+              *ngFor="let event of upcomingEvents"
+              class="list-group-item list-group-item-action rounded-2 mb-2"
+            >
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <strong>{{ event.title }}</strong>
+                  <div class="text-muted small">
+                    <i class="bi bi-calendar me-1"></i>
+                    {{ event.start | date : "mediumDate" }}
+                    <span *ngIf="event.end">
+                      - {{ event.end | date : "mediumDate" }}</span
+                    >
+                  </div>
+                </div>
+                <span
+                  class="badge rounded-pill px-3 py-2 text-white"
+                  [ngClass]="{
+                    'bg-warning': event.extendedProps?.type === 'assignment',
+                    'bg-info': event.extendedProps?.type === 'course'
+                  }"
+                >
+                  {{
+                    event.extendedProps?.type === "assignment"
+                      ? "Devoir"
+                      : "Cours"
+                  }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+</div>

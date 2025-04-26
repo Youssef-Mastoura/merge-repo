@@ -1,0 +1,245 @@
+<div class="bank-accounts-container">
+  <!-- Header avec bouton d'ajout -->
+  <div class="bank-accounts-header">
+    <h2 class="bank-accounts-title">Management of Bank Accounts</h2>
+    <button class="bank-accounts-add-btn" (click)="ajouter()">
+      <i class="fas fa-plus-circle"></i> New Account
+    </button>
+  </div>
+
+  <!-- Grille des comptes -->
+  <div class="bank-accounts-grid">
+    <div
+      *ngFor="let compte of comptes; let i = index"
+      class="bank-account-card"
+    >
+      <div class="bank-account-card-header">
+        <div class="account-badge">#{{ i + 1 }}</div>
+        <h3 class="account-title">
+          Account of {{ compte.user.first_Name }} {{ compte.user.last_Name }}
+        </h3>
+      </div>
+
+      <div class="bank-account-card-body">
+        <div class="account-detail">
+          <span class="detail-label">Solde:</span>
+          <span class="detail-value">{{ compte.montant }} TND</span>
+        </div>
+      </div>
+
+      <div class="bank-account-card-footer">
+        <button
+          class="account-btn detail-btn"
+          (click)="voirDetails(compte.idCompteBancaire)"
+        >
+          <i class="fas fa-eye"></i> Details
+        </button>
+        <button
+          class="account-btn edit-btn"
+          (click)="modifierCompte(compte.idCompteBancaire)"
+        >
+          <i class="fas fa-edit"></i> Update
+        </button>
+        <button
+          class="account-btn delete-btn"
+          (click)="supprimerCompte(compte.idCompteBancaire)"
+        >
+          <i class="fas fa-trash-alt"></i> Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Style général */
+  .bank-accounts-container {
+    padding: 2rem;
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    background-color: #f8fafc;
+    min-height: 100vh;
+  }
+
+  /* En-tête */
+  .bank-accounts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .bank-accounts-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin: 0;
+  }
+
+  .bank-accounts-add-btn {
+    background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 2px 5px rgba(66, 153, 225, 0.3);
+  }
+
+  .bank-accounts-add-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(66, 153, 225, 0.4);
+  }
+
+  /* Grille des comptes */
+  .bank-accounts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  /* Carte de compte */
+  .bank-account-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e2e8f0;
+  }
+
+  .bank-account-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  }
+
+  .bank-account-card-header {
+    background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+    color: white;
+    padding: 1.25rem;
+    position: relative;
+  }
+
+  .account-badge {
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    background: #4299e1;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .account-title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 500;
+    padding-right: 30px;
+  }
+
+  .bank-account-card-body {
+    padding: 1.5rem;
+  }
+
+  .account-detail {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #edf2f7;
+  }
+
+  .account-detail:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+
+  .detail-label {
+    font-weight: 500;
+    color: #4a5568;
+  }
+
+  .detail-value {
+    font-weight: 600;
+    color: #2d3748;
+  }
+
+  /* Pied de carte */
+  .bank-account-card-footer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    padding: 0 1.5rem 1.5rem;
+  }
+
+  .account-btn {
+    border: none;
+    padding: 0.6rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .detail-btn {
+    background-color: #e2e8f0;
+    color: #4a5568;
+  }
+
+  .detail-btn:hover {
+    background-color: #cbd5e0;
+  }
+
+  .edit-btn {
+    background-color: #f6e05e;
+    color: #975a16;
+  }
+
+  .edit-btn:hover {
+    background-color: #ecc94b;
+  }
+
+  .delete-btn {
+    background-color: #fed7d7;
+    color: #c53030;
+  }
+
+  .delete-btn:hover {
+    background-color: #feb2b2;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .bank-accounts-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .bank-accounts-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .bank-account-card-footer {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

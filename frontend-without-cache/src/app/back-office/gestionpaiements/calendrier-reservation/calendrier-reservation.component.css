@@ -1,0 +1,68 @@
+.calendar {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+  }
+  
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+  }
+  
+  .day-label {
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+  }
+  
+  .calendar-day {
+    min-height: 80px;
+    border: 1px solid #ddd;
+    text-align: center;
+    position: relative;
+    background-color: #f9f9f9;
+  }
+  
+  .calendar-day.has-event {
+    background-color: #ffeb3b;
+  }
+  
+  .day-number {
+    font-weight: bold;
+    display: block;
+    margin-top: 5px;
+  }
+  
+  .reservation {
+    font-size: 12px;
+    background: #2196f3;
+    color: white;
+    border-radius: 3px;
+    padding: 2px;
+    margin: 2px 0;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #4e73df, #224abe);
+    border: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    color: #fff;
+  }
+  
+  .btn-primary:hover {
+    background: linear-gradient(135deg, #3756c9, #1a3b99);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  

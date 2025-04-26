@@ -1,0 +1,70 @@
+.event-name {
+  font-size: 1.3rem;
+  color: #444;
+}
+
+.event-text {
+  font-size: 1rem;
+  color: #555;
+}
+
+.custom-card {
+  background: rgba(255, 240, 245, 0.4);
+  border-radius: 16px;
+  border: none;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  min-height: 450px;
+}
+
+.custom-card:hover {
+  box-shadow: 0 0 18px rgba(255, 182, 193, 0.5);
+}
+
+.card-img-top {
+  height: 220px;
+  object-fit: cover;
+  border-radius: 16px 16px 0 0;
+}
+
+/* Feedback section */
+.feedback-box {
+  background: rgba(255, 240, 245, 0.3);
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 0 10px rgba(224, 176, 255, 0.3);
+}
+
+.feedback-textarea,
+.rating-input {
+  border-radius: 12px;
+  border: 1px solid #d6b3f9;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.feedback-textarea:focus,
+.rating-input:focus {
+  outline: none;
+  border-color: #c996ff;
+  box-shadow: 0 0 5px rgba(197, 128, 255, 0.6);
+}
+
+.rating-label {
+  font-weight: bold;
+  color: #555;
+}
+
+.submit-feedback-btn {
+  background: linear-gradient(45deg, #c471f5, #f64f59);
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 20px;
+  transition: 0.3s ease;
+}
+
+.submit-feedback-btn:hover {
+  background: linear-gradient(45deg, #a453dd, #f53844);
+  transform: scale(1.05);
+}

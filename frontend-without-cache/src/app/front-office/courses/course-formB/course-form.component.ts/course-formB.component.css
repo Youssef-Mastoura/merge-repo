@@ -1,0 +1,244 @@
+/* Variables CSS pour une cohérence */
+:root {
+  --primary-color: #6c2a50;
+  --secondary-color: #f8c4d3;
+  --accent-color: #4e73df;
+  --background-color: #f7f9fb;
+  --text-color: #4b2f47;
+  --light-gray: #f1f1f1;
+  --error-color: #ff6b6b;
+  --success-color: #28a745;
+}
+
+/* Style de fond et ombre */
+.custom-bg {
+  background-color: var(--background-color);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 900px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Titre personnalisé */
+.custom-title {
+  color: var(--primary-color);
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.custom-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+  border-radius: 3px;
+}
+
+/* Labels personnalisés */
+.custom-label {
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.custom-label .required-indicator {
+  color: var(--error-color);
+  font-size: 0.8em;
+}
+
+/* Champs de saisie personnalisés */
+.custom-input {
+  border-radius: 10px;
+  padding: 12px 15px;
+  font-size: 1rem;
+  background-color: white;
+  border: 2px solid #e9ecef;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.custom-input:focus {
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(78, 115, 223, 0.15);
+  border-color: var(--accent-color);
+  outline: none;
+}
+
+.custom-input::placeholder {
+  color: #adb5bd;
+  opacity: 1;
+}
+
+/* Boutons pastel */
+.btn-pastel {
+  border-radius: 50px;
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: linear-gradient(145deg, #f8c4d3, #f2b6d3);
+  color: var(--primary-color);
+  border: none;
+  transition: all 0.3s ease, transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 180px;
+}
+
+.btn-pastel:hover {
+  background: linear-gradient(145deg, #f5a1c5, #f095bb);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  color: var(--primary-color);
+}
+
+.btn-pastel:active {
+  transform: translateY(1px);
+}
+
+.btn-pastel:disabled {
+  opacity: 0.7;
+  transform: none !important;
+  background: #e9ecef;
+  color: #6c757d;
+}
+
+/* Bouton secondaire pastel */
+.btn-pastel.custom-btn-secondary {
+  background: linear-gradient(145deg, #b6d1e8, #98bddf);
+  color: #3a4e6b;
+}
+
+.btn-pastel.custom-btn-secondary:hover {
+  background: linear-gradient(145deg, #9fb8d9, #89a3c8);
+  color: #3a4e6b;
+}
+
+/* Style des erreurs */
+.text-danger {
+  font-size: 0.875rem;
+  color: var(--error-color);
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Style des succès */
+.text-success {
+  font-size: 0.875rem;
+  color: var(--success-color);
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Aperçu image */
+.preview-image {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 8px;
+  border: 2px dashed #dee2e6;
+  transition: all 0.3s ease;
+}
+
+.preview-image:hover {
+  border-color: var(--secondary-color);
+}
+
+/* Style pour les groupes de champs */
+.form-group {
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.form-group:focus-within {
+  transform: translateY(-2px);
+}
+
+/* Style responsive */
+@media (max-width: 768px) {
+  .custom-bg {
+    padding: 1.5rem;
+    margin: 1rem;
+    border-radius: 12px;
+  }
+  
+  .custom-title {
+    font-size: 1.8rem;
+  }
+  
+  .btn-pastel {
+    padding: 10px 20px;
+    font-size: 1rem;
+    min-width: 150px;
+  }
+}
+
+/* Animation de chargement */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animated-field {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+/* styles.css */
+.happy {
+  filter: hue-rotate(120deg) saturate(1.2);
+}
+
+.confused {
+  filter: hue-rotate(30deg) saturate(0.8);
+  animation: shake 0.5s infinite;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+.confetti {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 30%, rgb(202, 127, 176) 5%, transparent 5%),
+    radial-gradient(circle at 80% 20%, #f0f 5%, transparent 5%),
+    radial-gradient(circle at 30% 70%, rgb(206, 173, 200) 5%, transparent 5%);
+  animation: confetti 2s ease-out;
+}
+
+.checkmark {
+  font-size: 100px;
+  color: #4CAF50;
+  animation: scaleIn 0.5s cubic-bezier(0.25, 1.5, 0.75, 1.5);
+}
+
+@keyframes confetti {
+  0% { transform: translateY(0) rotate(0); }
+  100% { transform: translateY(100vh) rotate(360deg); }
+}
+
+@keyframes scaleIn {
+  0% { transform: scale(0); }
+  70% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}

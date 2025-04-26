@@ -1,0 +1,253 @@
+<div class="container custom-bg animate__animated animate__fadeIn">
+  <h2 class="custom-title">
+    <i class="fas {{ isEditMode ? 'fa-edit' : 'fa-plus-circle' }} me-2"></i>
+    {{ isEditMode ? 'Modifier' : 'Créer' }} un cours
+  </h2>
+
+  <div class="form-puzzle-container">
+    <form [formGroup]="courseForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data" class="needs-validation" novalidate>
+      <!-- Champ Titre -->
+      <div class="form-group animated-field">
+        <label for="title_Course" class="form-label custom-label">
+          <i class="fas fa-heading me-1"></i>Titre <span class="required-indicator">*</span>
+        </label>
+        <input type="text" class="form-control custom-input" id="title_Course" 
+               formControlName="title_Course" placeholder="Ex: Introduction à Angular">
+        <div *ngIf="showError('title_Course')" class="text-danger">
+          <i class="fas fa-exclamation-circle"></i>
+          <span *ngIf="courseForm.get('title_Course')?.errors?.['required']">Le titre est requis</span>
+        </div>
+      </div>
+
+      <!-- Champ Description -->
+      <div class="form-group animated-field">
+        <label for="description_Course" class="form-label custom-label">
+          <i class="fas fa-align-left me-1"></i>Description <span class="required-indicator">*</span>
+        </label>
+        <textarea class="form-control custom-input" id="description_Course" rows="4"
+                  formControlName="description_Course" 
+                  placeholder="Décrivez le contenu de votre cours..."></textarea>
+        <small class="text-muted d-block mt-1">Minimum 50 caractères</small>
+        <div *ngIf="showError('description_Course')" class="text-danger">
+          <i class="fas fa-exclamation-circle"></i>
+          <span *ngIf="courseForm.get('description_Course')?.errors?.['required']">La description est requise</span>
+          <span *ngIf="courseForm.get('description_Course')?.errors?.['minlength']">La description est trop courte</span>
+        </div>
+      </div>
+
+      <!-- Section en ligne/en direct -->
+      <div class="row">
+        <!-- Champ Langue -->
+        <div class="col-md-6 form-group animated-field">
+          <label for="language_Course" class="form-label custom-label">
+            <i class="fas fa-language me-1"></i>Langue <span class="required-indicator">*</span>
+          </label>
+          <select class="form-select custom-input" id="language_Course" formControlName="language_Course">
+            <option value="" disabled selected>Sélectionnez une langue</option>
+            <option value="Français">Français</option>
+            <option value="Anglais">Anglais</option>
+            <option value="Arabe">Arabe</option>
+            <option value="Espagnol">Espagnol</option>
+          </select>
+          <div *ngIf="showError('language_Course')" class="text-danger">
+            <i class="fas fa-exclamation-circle"></i> La langue est requise
+          </div>
+        </div>
+
+        <!-- Champ Type de Cours -->
+        <div class="col-md-6 form-group animated-field">
+          <label for="courseType" class="form-label custom-label">
+            <i class="fas fa-laptop-house me-1"></i>Type de cours <span class="required-indicator">*</span>
+          </label>
+          <select class="form-select custom-input" id="courseType" formControlName="courseType">
+            <option [value]="courseTypes.ONLINE">En ligne</option>
+            <option [value]="courseTypes.LIVE">En direct</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Champ Date de session (si en direct) -->
+      <div class="form-group animated-field" *ngIf="courseForm.get('courseType')?.value === courseTypes.LIVE">
+        <label for="sessionDate" class="form-label custom-label">
+          <i class="far fa-calendar-alt me-1"></i>Date de la session <span class="required-indicator">*</span>
+        </label>
+        <input type="datetime-local" class="form-control custom-input" id="sessionDate" 
+               formControlName="sessionDate" [min]="minDate">
+        <div *ngIf="showError('sessionDate')" class="text-danger">
+          <i class="fas fa-exclamation-circle"></i> La date de session est requise pour les cours en direct
+        </div>
+      </div>
+
+      <!-- Section Prix/Durée -->
+      <div class="row">
+        <!-- Champ Prix -->
+        <div class="col-md-6 form-group animated-field">
+          <label for="price_Course" class="form-label custom-label">
+            <i class="fas fa-euro-sign me-1"></i>Prix (€) <span class="required-indicator">*</span>
+          </label>
+          <div class="input-group">
+            <input type="number" class="form-control custom-input" id="price_Course" 
+                   formControlName="price_Course" min="0" step="0.01">
+            <span class="input-group-text">€</span>
+          </div>
+          <div *ngIf="showError('price_Course')" class="text-danger">
+            <i class="fas fa-exclamation-circle"></i>
+            <span *ngIf="courseForm.get('price_Course')?.errors?.['required']">Le prix est requis</span>
+            <span *ngIf="courseForm.get('price_Course')?.errors?.['min']">Le prix doit être positif</span>
+          </div>
+        </div>
+
+        <!-- Champ Durée -->
+        <div class="col-md-6 form-group animated-field">
+          <label for="duration_Course" class="form-label custom-label">
+            <i class="far fa-clock me-1"></i>Durée (heures) <span class="required-indicator">*</span>
+          </label>
+          <div class="input-group">
+            <input type="number" class="form-control custom-input" id="duration_Course" 
+                   formControlName="duration_Course" min="1">
+            <span class="input-group-text">heures</span>
+          </div>
+          <div *ngIf="showError('duration_Course')" class="text-danger">
+            <i class="fas fa-exclamation-circle"></i>
+            <span *ngIf="courseForm.get('duration_Course')?.errors?.['required']">La durée est requise</span>
+            <span *ngIf="courseForm.get('duration_Course')?.errors?.['min']">Minimum 1 heure</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section Catégorie/Niveau -->
+      <div class="row">
+        <!-- Champ Catégorie -->
+        <div class="col-md-6 form-group animated-field">
+          <label for="name_Category" class="form-label custom-label">
+            <i class="fas fa-tag me-1"></i>Catégorie <span class="required-indicator">*</span>
+          </label>
+          <select class="form-select custom-input" id="name_Category" formControlName="name_Category">
+            <option value="" disabled selected>Sélectionnez une catégorie</option>
+            <option *ngFor="let category of categories" [value]="category.name_Category">
+              {{ category.name_Category }}
+            </option>
+          </select>
+          <div *ngIf="showError('name_Category')" class="text-danger">
+            <i class="fas fa-exclamation-circle"></i> La catégorie est requise
+          </div>
+        </div>
+
+        <!-- Champ Niveau -->
+        <div class="col-md-6 form-group animated-field">
+          <label for="level_Course" class="form-label custom-label">
+            <i class="fas fa-signal-alt me-1"></i>Niveau <span class="required-indicator">*</span>
+          </label>
+          <select class="form-select custom-input" id="level_Course" formControlName="level_Course">
+            <option value="" disabled selected>Sélectionnez un niveau</option>
+            <option value="Débutant">Débutant</option>
+            <option value="Intermédiaire">Intermédiaire</option>
+            <option value="Avancé">Avancé</option>
+          </select>
+          <div *ngIf="showError('level_Course')" class="text-danger">
+            <i class="fas fa-exclamation-circle"></i> Le niveau est requis
+          </div>
+        </div>
+      </div>
+
+      <!-- Champ Pré-requis -->
+      <div class="form-group animated-field">
+        <label for="prerequisites_Course" class="form-label custom-label">
+          <i class="fas fa-list-check me-1"></i>Pré-requis
+        </label>
+        <textarea class="form-control custom-input" id="prerequisites_Course" rows="2"
+                  formControlName="prerequisites_Course" 
+                  placeholder="Listez les pré-requis pour ce cours (séparés par des virgules)"></textarea>
+        <small class="text-muted d-block mt-1">Ex: Connaissance de base en programmation, HTML</small>
+      </div>
+
+      <!-- Champ Image -->
+      <div class="form-group animated-field">
+        <label class="form-label custom-label">
+          <i class="far fa-image me-1"></i>Image du cours <span class="required-indicator">*</span>
+        </label>
+        
+        <div class="d-flex flex-column flex-md-row gap-3 mb-3">
+          <!-- Option fichier -->
+          <div class="flex-grow-1">
+            <div class="input-group">
+              <input 
+                type="file" 
+                class="form-control custom-input" 
+                id="imageUpload" 
+                accept="image/*"
+                (change)="onFileSelected($event)"
+              >
+              <button 
+                class="btn btn-outline-secondary" 
+                type="button"
+                (click)="clearImageSelection()"
+                [disabled]="!selectedFile && !imageUrl"
+              >
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+            <small *ngIf="selectedFile" class="text-success d-block mt-1">
+              <i class="fas fa-check-circle me-1"></i>Fichier sélectionné: {{selectedFile?.name}}
+            </small>
+          </div>
+          
+          <div class="text-center my-2 my-md-0 d-flex align-items-center">
+            <span class="mx-2 text-muted">OU</span>
+          </div>
+          
+          <!-- Option URL -->
+          <div class="flex-grow-1">
+            <input 
+              type="text" 
+              class="form-control custom-input" 
+              placeholder="https://example.com/image.jpg" 
+              (input)="onImageUrlInput($event)"
+              [value]="imageUrl"
+            >
+          </div>
+        </div>
+        
+        <!-- Aperçu image -->
+        <div *ngIf="imageUrl" class="mt-3 text-center">
+          <p class="mb-2"><small>Aperçu de l'image:</small></p>
+          <img 
+            [src]="imageUrl" 
+            alt="Aperçu de l'image" 
+            class="img-thumbnail preview-image"
+            onerror="this.src='assets/images/image-placeholder.png'"
+          >
+        </div>
+        
+        <input type="hidden" formControlName="image_Course">
+        
+        <div *ngIf="showError('image_Course')" class="text-danger mt-2">
+          <i class="fas fa-exclamation-circle me-1"></i>Une image est requise
+        </div>
+      </div>
+
+      <!-- Boutons -->
+      <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 mt-4">
+        <button type="submit" class="btn btn-pastel custom-btn" [disabled]="courseForm.invalid || loading">
+          <i class="fas {{ isEditMode ? 'fa-save' : 'fa-plus-circle' }} me-2"></i>
+          {{ isEditMode ? 'Mettre à jour' : 'ADD' }} the course
+          <span *ngIf="loading" class="ms-2">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span class="visually-hidden">Chargement...</span>
+          </span>
+        </button>
+        
+        <button type="button" class="btn btn-pastel custom-btn-secondary" 
+                routerLink="/professor/courses" [disabled]="loading">
+          <i class="fas fa-times-circle me-2"></i>Back
+        </button>
+      </div>
+    </form>
+
+
+    <div *ngIf="showSuccessAnimation" class="success-animation">
+      <div class="confetti"></div>
+      <div class="checkmark">✓</div>
+      <div class="success-message">Bravo !</div>
+    </div>
+</div>

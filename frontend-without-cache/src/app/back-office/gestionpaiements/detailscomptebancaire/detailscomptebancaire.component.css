@@ -1,0 +1,36 @@
+.custom-card {
+    background-color: #ffffff;
+    border-radius: 1.5rem;
+    overflow: hidden;
+  }
+  
+  .gradient-header {
+    background: linear-gradient(90deg, #ff6ec4, #f06595);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .section-title {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #343a40;
+    border-left: 5px solid #f06595;
+    padding-left: 12px;
+    margin-bottom: 1rem;
+  }
+  
+  .btn-outline-pink {
+    color: #f06595;
+    border: 2px solid #f06595;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .btn-outline-pink:hover {
+    background-color: #f06595;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(240, 101, 149, 0.3);
+  }
+  
+  qrcode {
+    max-width: 160px;
+  }

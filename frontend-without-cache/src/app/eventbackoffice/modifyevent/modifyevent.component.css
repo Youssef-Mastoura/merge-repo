@@ -1,0 +1,86 @@
+.modify-container {
+    padding: 40px;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  .modify-card {
+    background-color: rgba(255, 240, 255, 0.6);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(197, 139, 255, 0.2);
+    overflow: hidden;
+  }
+  
+  .modify-card-body {
+    padding: 30px;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .modify-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #5c4b84;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    font-weight: 600;
+    color: #4b3b5c;
+  }
+  
+  .form-control {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    font-size: 16px;
+  }
+  
+  .input-group .clear-btn {
+    background-color: #f64f59;
+    color: white;
+    font-weight: 500;
+    border: none;
+    transition: 0.3s ease;
+    border-radius: 0 8px 8px 0;
+  }
+  
+  .input-group .clear-btn:hover {
+    background-color: #ffb6c1;
+    color: #e42200;
+  }
+  
+  .image-preview img {
+    max-height: 200px;
+    max-width: 100%;
+    border-radius: 12px;
+    margin-top: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  
+  .map-container {
+    height: 300px;
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 10px;
+  }
+  
+  .update-btn {
+    background: linear-gradient(45deg, #c471f5, #f64f59);
+    color: white;
+    font-weight: bold;
+    border-radius: 25px;
+    padding: 12px 24px;
+    font-size: 16px;
+    transition: 0.3s ease;
+    border: none;
+  }
+  
+  .update-btn:hover {
+    background: linear-gradient(45deg, #a453dd, #f53844);
+    transform: scale(1.05);
+  }
+  

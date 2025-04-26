@@ -1,0 +1,61 @@
+<div *ngIf="ratingMessage" class="alert alert-warning alert-dismissible fade show fixed-top-alert" role="alert">
+  {{ ratingMessage }}
+  <button type="button" class="btn-close" aria-label="Close" (click)="ratingMessage = null"></button>
+</div>
+
+<br>
+<section class="montserrat text-center" style="margin: 70px;">
+  <p class="mb-4" style="font-size: 50px;color: rgb(138, 138, 138);" ><strong>LIST OF EVENTS</strong></p> <br>
+</section>
+
+
+<div class="container mt-4">
+    <div class="row mb-3" >
+      <div class="col-md-4 offset-md-4" style="margin-left: 300px;">
+        <input type="text"
+        class="search-input" [(ngModel)]="searchname" placeholder="Search events...">
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-add" style="margin-left: 30px;" routerLink="/admin/addevent">Add Event</button>
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-add"style="margin-left: 70px;" style="margin-left: 20px;" routerLink="/admin/topfive"> TOP 5 🏆 </button>
+      </div>
+    </div>
+    <br> <br> <br> 
+
+
+    <div class="row">
+      <div class="col-md-6 mb-4" *ngFor="let event of onSearch(); let i = index">
+        <div class="card custom-card shadow-sm h-100">
+          <img [src]="event.posterURL" class="card-img-top" alt="Event Poster">
+          <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
+            <h1 class="card-title event-name"><strong>{{ event.eventName }}</strong></h1>
+            <p class="card-text event-text"><strong>{{ event.eventDescription }}</strong></p>
+            <strong class="card-text event-text">Host:</strong> {{ event.host }}
+           {{ event.hostdescription }}<br>
+            <strong class="card-text event-text">host lindedin:</strong> {{ event.hostlinkedin }}
+            <p class="card-text event-text"><strong>Type:</strong> {{ event.eventType }}</p>
+            <p class="card-text event-text">
+              <strong class="card-text event-text">Starts:</strong> {{ event.eventStartDate  }}<br>
+              <strong class="card-text event-text">Ends:</strong> {{ event.eventEndDate  }}
+            </p>
+            <p class="card-text event-text">
+              <strong>Max Participants:</strong> {{ event.maxParticipants }}<br>
+              <strong>Register By:</strong> {{ event.registrationEndDate | date:'mediumDate' }}
+            </p>
+            <br>
+            <div class="d-flex justify-content-center gap-2 mt-3 flex-wrap">
+              <a [routerLink]="['/admin/modifyevent', event.eventId]" class="btn card-btn">Modify</a>
+              <button class="btn card-btn" (click)="deleteEvent(event.eventId)">Delete</button>
+              <button class="btn card-btn" (click)="rating(event.eventId)">Rating</button>
+              <button class="btn card-btn" [routerLink]="['/admin/eventfeedback', event.eventId]">Feedbacks</button>
+              <button class="btn card-btn" [routerLink]="['/admin/eventregistration', event.eventId]">Registrations</button>
+              <button class="btn card-btn" [routerLink]="['/admin/participants', event.eventId]">Launch</button>
+            </div>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

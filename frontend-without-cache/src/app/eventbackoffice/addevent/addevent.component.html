@@ -1,0 +1,114 @@
+<div class="container mt-4">
+    <div class="card bg-transparent" style="max-width: 1200px; margin: 0 auto;">
+      <div class="card-body" style="font-family: 'Arial', sans-serif;">
+        <h2 class="card-title">Add Event</h2>
+        <form (ngSubmit)="onSubmit()" #eventForm="ngForm" class="montserrat-form">
+          <div class="mb-3">
+            <label for="eventName" class="form-label">Event Name</label>
+            <input type="text" id="eventName" class="form-control" required [(ngModel)]="event.eventName" name="eventName">
+          </div>
+  
+          <div class="mb-3">
+            <label for="eventDescription" class="form-label">Event Description</label>
+            <textarea id="eventDescription" class="form-control" required [(ngModel)]="event.eventDescription" name="eventDescription"></textarea>
+          </div>
+  
+          <div class="mb-3">
+            <label for="eventType" class="form-label">Event Type</label>
+            <input type="text" id="eventType" class="form-control" required [(ngModel)]="event.eventType" name="eventType">
+          </div>
+  
+          <div class="mb-3">
+            <label for="posterUpload" class="form-label">Event Poster</label>
+            <div class="input-group">
+              <input 
+                type="file" 
+                class="form-control" 
+                id="posterUpload" 
+                accept="image/*"
+                (change)="onFileSelected($event)"
+                required
+              >
+              <button 
+                class="btn btn-outline-secondary" 
+                type="button"
+                (click)="clearImageSelection()"
+                [disabled]="!selectedFile"
+              >
+                Clear
+              </button>
+            </div>
+            <small *ngIf="selectedFile" class="text-success d-block mt-1">
+              Selected file: {{selectedFile.name}} ({{ (selectedFile.size / 1024).toFixed(2) }} KB)
+            </small>
+            <div *ngIf="imagePreview" class="mt-2">
+              <img [src]="imagePreview" alt="Preview" style="max-height: 200px; max-width: 100%; border-radius: 4px;">
+            </div>
+          </div>
+  
+          <div class="mb-3">
+            <label>Host</label>
+            <input class="form-control" [(ngModel)]="event.host" name="host" required />
+          </div>
+  
+          <div class="mb-3">
+            <label>Host Details</label>
+            <input class="form-control" [(ngModel)]="event.hostdescription" name="hostdescription" required />
+          </div>
+  
+          <div class="mb-3">
+            <label>Host Linkedin</label>
+            <input class="form-control" [(ngModel)]="event.hostlinkedin" name="hostlinkedin" />
+          </div>
+  
+          <div class="mb-3">
+            <label>Event Video URL</label>
+            <input class="form-control" [(ngModel)]="event.videoURL" name="videoURL" required />
+          </div>
+  
+          <div class="mb-3">
+            <label for="eventStartDate" class="form-label">Event Start Date</label>
+            <input type="datetime-local" id="eventStartDate" class="form-control" required [(ngModel)]="event.eventStartDate" name="eventStartDate">
+          </div>
+  
+          <div class="mb-3">
+            <label for="eventEndDate" class="form-label">Event End Date</label>
+            <input type="datetime-local" id="eventEndDate" class="form-control" required [(ngModel)]="event.eventEndDate" name="eventEndDate">
+          </div>
+  
+          <div class="mb-3">
+            <label for="maxParticipants" class="form-label">Max Participants</label>
+            <input type="number" id="maxParticipants" class="form-control" required [(ngModel)]="event.maxParticipants" name="maxParticipants">
+          </div>
+  
+          <div class="mb-3">
+            <label for="registrationEndDate" class="form-label">Registration End Date</label>
+            <input type="datetime-local" id="registrationEndDate" class="form-control" required [(ngModel)]="event.registrationEndDate" name="registrationEndDate">
+          </div>
+  
+          <div class="mb-3">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" id="locationSearch" class="form-control mb-2" placeholder="Search for a location" #search>
+            <div id="map" style="height: 300px; width: 100%; border-radius: 8px;"></div>
+            <input type="hidden" id="location" class="form-control" [(ngModel)]="event.location" name="location">
+            <small class="text-muted">Click on the map to select the event location</small>
+          </div>
+  
+          <button type="submit" styel="margin-right:60px;" class="btn update-btn" [disabled]="!eventForm.form.valid || isUploading">
+            <span *ngIf="!isUploading">Submit</span>
+            <span *ngIf="isUploading">
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              Uploading...
+            </span>
+          </button>
+        </form>
+      </div>
+      <br>
+      <div>
+      <button class="btn update-btn" routerLink="/admin/event" styel="margin-left:60px;">Return</button>
+</div>
+<br>
+
+    </div>
+  </div>
+  

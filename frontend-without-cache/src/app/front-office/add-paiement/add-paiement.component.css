@@ -1,0 +1,71 @@
+/* Dégradé inspiré du rose/bleu pastel */
+.gradient-card {
+  background: linear-gradient(135deg, #f9c5d1 0%, #fbc8d4 25%, #f5e3fc 50%, #d6f0fd 75%, #c8e3fd 100%);
+  border: none;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.gradient-card .card-header {
+  background: transparent;
+  border-bottom: none;
+}
+
+.gradient-card .card-body {
+  background: transparent;
+}
+
+/* Couleurs pastel */
+.bg-custom-pink {
+  background-color: #f48fb1 !important;
+}
+
+.text-custom-pink,
+.text-pink {
+  color: #f48fb1 !important;
+}
+
+.border-custom-pink,
+.border-pink {
+  border: 2px solid #f48fb1 !important;
+}
+
+/* Bouton doux et pastel */
+.btn-custom,
+.btn-pink {
+  background-color: #f48fb1;
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 0.6rem 1.5rem;
+  border-radius: 0.6rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-custom:hover,
+.btn-pink:hover {
+  background-color: #f06292;
+  box-shadow: 0 4px 12px rgba(244, 143, 177, 0.4);
+}
+
+/* Carte de solde bancaire */
+.balance-card {
+  background: linear-gradient(135deg, #f9c5d1 0%, #fbc8d4 25%, #f5e3fc 50%, #d6f0fd 75%, #c8e3fd 100%);
+  border: 2px solid #f58fa0;
+  border-radius: 1.5rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.balance-header {
+  background: linear-gradient(135deg, #f58fa0, #ffacb3);
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.text-balance-amount {
+  color: #24724f; /* vert foncé mais élégant */
+  font-size: 2.2rem;
+}

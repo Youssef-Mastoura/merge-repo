@@ -1,0 +1,78 @@
+/* --- Carte globale du formulaire --- */
+.custom-card {
+  background-color: #fff0f5; /* rose pâle */
+  border-radius: 1.5rem;
+  overflow: hidden;
+  border: 1px solid #f8c1d4;
+}
+
+/* --- En-tête en dégradé rose --- */
+.gradient-header {
+  background: linear-gradient(135deg, #ff69b4, #ffb6c1); /* rose flashy à rose clair */
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+/* --- Champs du formulaire --- */
+.form-label {
+  font-weight: 600;
+  color: #880e4f;
+}
+
+.form-control,
+.form-select {
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #f8c1d4;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #f06292;
+  box-shadow: 0 0 0 0.2rem rgba(240, 98, 146, 0.25);
+}
+
+/* --- Feedback pour les erreurs --- */
+.invalid-feedback {
+  font-size: 0.875rem;
+  color: #e91e63;
+  margin-top: 0.25rem;
+}
+
+/* --- Boutons personnalisés --- */
+.btn {
+  transition: all 0.3s ease-in-out;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Bouton rose */
+.btn-pink {
+  background-color: #e91e63;
+  border-color: #e91e63;
+  color: white;
+}
+
+.btn-pink:hover {
+  background-color: #c2185b;
+  border-color: #c2185b;
+}
+
+/* Bouton retour sombre */
+.btn-outline-dark:hover {
+  background-color: #343a40;
+  color: white;
+}
+
+/* --- Responsive padding --- */
+@media (max-width: 768px) {
+  .card-body {
+    padding: 2rem !important;
+  }
+}

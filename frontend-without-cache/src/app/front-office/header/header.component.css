@@ -1,0 +1,82 @@
+/* Navbar */
+.navbar {
+  background: linear-gradient(90deg, #e8b9ef, #c6e6fe); /* Dégradé doux */
+  border-bottom: 2px solid #c8e3fd;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Logo */
+.navbar-brand img {
+  height: 45px;
+}
+
+/* Navbar links */
+.nav-item .nav-link {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  color: #333; 
+  font-size: 1rem;
+  text-transform: uppercase;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-item .nav-link:hover {
+  color: #ffacb3; /* Hover couleur pastel */
+}
+
+/* Active link */
+.nav-item .nav-link.active {
+  color: #e7bded;
+  font-weight: 600;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  background-color: #ffffff;
+  border: 1px solid #e7bded;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Dropdown Items */
+.dropdown-item {
+  font-family: 'Roboto', sans-serif;
+  color: #555;
+  font-weight: 500;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dropdown-item:hover {
+  background-color: #c6e6fe;
+  color: #333;
+}
+
+/* Profile Dropdown */
+#profileDropdown {
+  color: #333;
+}
+
+#profileDropdown:hover {
+  color: #ffacb3;
+}
+
+/* Navbar toggler (mobile button) */
+.navbar-toggler {
+  border: none;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,..."); /* Optionnel: custom icone si tu veux */
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+  .navbar-nav {
+    text-align: center;
+  }
+
+  .nav-item .nav-link {
+    font-size: 0.9rem;
+  }
+}

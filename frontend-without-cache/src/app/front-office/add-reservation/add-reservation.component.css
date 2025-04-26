@@ -1,0 +1,97 @@
+/* Dégradés personnalisés */
+.bg-custom-purple {
+  background: linear-gradient(135deg, #e7bded, #e8b9ef);
+}
+
+.bg-custom-blue {
+  background: linear-gradient(135deg, #c8e3fd, #c6e6fe);
+}
+
+/* Bordures */
+.border-custom-purple {
+  border-color: #e8b9ef !important;
+}
+
+.border-custom-blue {
+  border-color: #c6e6fe !important;
+}
+
+/* Couleurs de texte */
+.text-custom-purple {
+  color: #e7bded;
+}
+
+.text-custom-pink {
+  color: #ffacb3;
+}
+
+.text-custom-blue {
+  color: #7ab6f9;
+}
+
+/* Arrière-plan clair */
+.bg-light-purple {
+  background-color: #f9ebfb;
+}
+
+/* Bouton personnalisé */
+.btn-custom {
+  background-color: #ffacb3;
+  border: none;
+  color: white;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+  border-radius: 0.5rem;
+  padding: 0.6rem 1.2rem;
+}
+
+.btn-custom:hover {
+  background-color: #f58fa0;
+  box-shadow: 0 4px 12px rgba(255, 172, 179, 0.4);
+}
+
+/* Nouveau fond pour le formulaire */
+.gradient-card {
+  background: linear-gradient(135deg, #f9c5d1 0%, #fbc8d4 25%, #f5e3fc 50%, #d6f0fd 75%, #c8e3fd 100%);
+  border: none;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.gradient-card .card-header {
+  background: transparent;
+  border-bottom: none;
+}
+
+.gradient-card .card-body {
+  background: transparent;
+}
+
+.gradient-card h3,
+.gradient-card label,
+.gradient-card h5,
+.gradient-card p {
+  color: #4b4b4b;
+}
+
+/* Carte de solde bancaire */
+.balance-card {
+  background: linear-gradient(135deg, #f9c5d1 0%, #fbc8d4 25%, #f5e3fc 50%, #d6f0fd 75%, #c8e3fd 100%);
+  border: 2px solid #f58fa0;
+  border-radius: 1.5rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.balance-header {
+  background: linear-gradient(135deg, #f58fa0, #ffacb3);
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.text-balance-amount {
+  color: #24724f; /* vert foncé mais élégant */
+  font-size: 2.2rem;
+}

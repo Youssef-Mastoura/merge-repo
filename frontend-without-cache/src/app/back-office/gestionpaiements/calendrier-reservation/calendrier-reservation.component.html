@@ -1,0 +1,34 @@
+<div class="d-flex justify-content-end mb-3">
+    <button class="btn btn-primary shadow-sm rounded-pill px-4 py-2 d-flex align-items-center"
+            (click)="showStatistics()">
+      <i class="fas fa-chart-pie me-2"></i>
+      Statistiques des paiements
+    </button>
+  </div>
+
+
+<div class="calendar">
+    <div class="calendar-header">
+      <button (click)="changeMonth(-1)">&#9665;</button>
+      <h2>{{ currentYear }} - {{ currentMonth + 1 }}</h2>
+      <button (click)="changeMonth(1)">&#9655;</button>
+    </div>
+  
+    <div class="calendar-grid">
+      <div class="day-label" *ngFor="let day of ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam']">
+        {{ day }}
+      </div>
+  
+      <div *ngFor="let day of daysInMonth" class="calendar-day" [ngClass]="{'has-event': day?.reservations?.length}">
+        <div *ngIf="day">
+          <span class="day-number">{{ day.day }}</span>
+          <div class="reservation" *ngFor="let res of day.reservations">
+            <small>{{ res.user.first_name }} a réservé le cour {{ res.course.title_Course }}</small>
+            <br>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  

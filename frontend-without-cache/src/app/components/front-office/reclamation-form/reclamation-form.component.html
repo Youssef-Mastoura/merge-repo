@@ -1,0 +1,101 @@
+<div class="reclamation-background py-5">
+  <div class="container">
+    <div class="form-wrapper mx-auto shadow-lg p-5 rounded bg-white" style="max-width: 700px;">
+<!--
+      <h2 class="text-center mb-4 text-primary fw-bold">
+        <i class="bi bi-chat-left-dots-fill me-2"></i> New Claim
+      </h2>
+
+     -->
+
+      <div class="claim-container bg-light py-5">
+        <div class="container">
+          <div class="claim-card mx-auto p-4 p-md-5 bg-white rounded-4 shadow-sm" style="max-width: 700px;">
+            
+            <!-- En-tête avec icône et titre -->
+            <div class="claim-header text-center mb-5">
+              <div class="claim-icon bg-primary bg-opacity-10 rounded-circle d-inline-flex p-3 mb-3">
+                <i class="bi bi-chat-left-dots-fill text-primary fs-1"></i>
+              </div>
+              <h2 class="text-dark fw-bold mb-2">New Claim</h2>
+              <p class="text-muted">Please fill all required fields</p>
+            </div>
+      
+            <!-- Formulaire -->
+            <form (ngSubmit)="onSubmit()" #reclamationForm="ngForm">
+              
+              <!-- Type de réclamation -->
+              <div class="mb-4">
+                <label class="form-label fw-medium text-dark mb-2">
+                  <i class="bi bi-tag-fill text-primary me-2"></i>
+                  Complaint Type <span class="text-danger">*</span>
+                </label>
+                <select class="form-select form-select-lg border-2 py-3" 
+                        [(ngModel)]="reclamation.type" name="type" required>
+                  <option value="" disabled selected>Select your issue type</option>
+                  <option value="COURSES">Courses</option>
+                  <option value="PAYMENT">Payment</option>
+                  <option value="ADMINISTRATIVE">Administrative</option>
+                  <option value="TECHNICAL">Technical</option>
+                </select>
+              </div>
+      
+              <!-- Description -->
+              <div class="mb-4">
+                <label class="form-label fw-medium text-dark mb-2">
+                  <i class="bi bi-text-paragraph text-primary me-2"></i>
+                  Issue Description <span class="text-danger">*</span>
+                </label>
+                <textarea class="form-control border-2 py-3" rows="4"
+                          [(ngModel)]="reclamation.description" name="description" required
+                          placeholder="Describe your issue in detail..."></textarea>
+                <div class="form-text mt-1">
+                  <i class="bi bi-info-circle text-muted me-1"></i>
+                  Our AI will analyze priority based on your description
+                </div>
+              </div>
+      
+              <!-- Solution proposée -->
+              <div class="mb-4">
+                <label class="form-label fw-medium text-dark mb-2">
+                  <i class="bi bi-lightbulb text-primary me-2"></i>
+                  Suggested Solution
+                </label>
+                <textarea class="form-control border-2 py-3" rows="3"
+                          [(ngModel)]="reclamation.solution" name="solution"
+                          placeholder="Your proposed solution (optional)"></textarea>
+              </div>
+      
+              <!-- Bouton de soumission -->
+              <div class="mt-5">
+                <button type="submit" class="btn btn-primary w-100 py-3 fw-bold"
+                        [disabled]="!reclamationForm.form.valid">
+                  <i class="bi bi-send me-2"></i> Submit Claim
+                </button>
+              </div>
+            </form>
+      
+            <!-- Messages de feedback -->
+            <div *ngIf="message" class="alert alert-success mt-4 d-flex align-items-center">
+              <i class="bi bi-check-circle-fill me-3 fs-5"></i>
+              <div>{{ message }}</div>
+            </div>
+            <div *ngIf="error" class="alert alert-danger mt-4 d-flex align-items-center">
+              <i class="bi bi-exclamation-triangle-fill me-3 fs-5"></i>
+              <div>{{ error }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Messages de feedback -->
+      <div *ngIf="message" class="alert alert-success mt-4">
+        <i class="bi bi-check-circle-fill me-1"></i> {{ message }}
+      </div>
+      <div *ngIf="error" class="alert alert-danger mt-4">
+        <i class="bi bi-exclamation-triangle-fill me-1"></i> {{ error }}
+      </div>
+    </div>
+  </div>
+</div>
