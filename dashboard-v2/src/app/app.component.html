@@ -1,9 +1,0 @@
-<dashboard-layout *ngIf="currentLayout === 'admin'">
-  <router-outlet></router-outlet>
-</dashboard-layout>
-
-<div *ngIf="currentLayout !== 'admin'">
-  <app-header></app-header>
-  <router-outlet></router-outlet>
-  <app-footer></app-footer>
-</div>
