@@ -1,0 +1,371 @@
+.video-container {
+    width: 80%; /* Makes it responsive */
+    max-width: 960px; /* Optional: limits the max size */
+    aspect-ratio: 16 / 9; /* Ensures correct video aspect ratio */
+  }
+  
+  .video-player {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .event-type-badge {
+    background: linear-gradient(to right, #ffe4c3, #ff8146);
+    color: #b30000; /* dark red text */
+    padding: 20px 30px;
+    border-radius:8px; /* pill shape */
+    font-weight: 60;
+    font-size: 15px;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f5f5f5;
+}
+
+.card {
+    width: 800px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 999px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #ddd; /* Placeholder color */
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.host-name {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.host-description {
+    color: #666;
+    font-size: 14px;
+}
+
+.follow-btn {
+    background-color: #000;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.host-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 30px 0;
+    padding: 15px;
+    max-width: 700px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.host-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ffffff;
+}
+
+.host-info {
+    flex-grow: 1;
+    min-width: 0; /* Prevents text overflow issues */
+}
+
+.hosted-by {
+    font-size: 18px;
+    margin: 0 0 5px 0;
+    color: #333;
+    font-weight: 600;
+}
+
+.host-stats {
+    font-size: 14px;
+    margin: 0;
+    color: #666;
+}
+
+.follow-btn {
+    background-color: #5c009a;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-style: normal; /* Explicitly prevents italics */
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    text-decoration: none; /* Important for anchor tag version */
+    display: inline-block; /* Important for anchor tag version */
+}
+
+.follow-btn:hover {
+    background-color: #7800d3;
+    transform: translateY(-1px);
+}
+
+.info-text {
+    font-size: 18px;
+    color: black;
+    line-height: 1.6;
+}
+.section-title {
+    font-weight: bold;
+    margin-top: 20px;
+}
+.event-type-badge {
+    display: inline-block;
+    background-color: #ffe4e1;
+    color: black;
+    padding: 5px 12px;
+    border-radius: 88px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.event-type-badge-2 {
+    display: inline-block;
+    background: linear-gradient(to right, #9f00bf, #6306b4);
+    color: rgb(255, 255, 255);
+    padding: 15px 30px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.register {
+  background: linear-gradient(to right, #8c0000, #910000);
+    border-radius: 999px;
+    color: white;            
+    border: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .register:hover {
+    background-color: #e100ff72; 
+  }
+  .return {
+    background: linear-gradient(to right, #d10000, #ca0000);
+
+      border-radius: 999px;
+      color: rgb(0, 0, 0);   
+      font-size: 19px;         
+      border: none;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .return:hover {
+      background: linear-gradient(to right, #ff7474, #ee6f6f);
+    }
+
+  #map {
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .gm-style-iw {
+    padding: 10px;
+  }
+  
+  .gm-style-iw h5 {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+  }
+  
+  .gm-style-iw p {
+    margin: 0;
+    font-size: 14px;
+  }
+
+  /* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.4s ease-out;
+  }
+  
+  .modal-icon {
+    margin-bottom: 20px;
+  }
+  
+  .modal-icon svg {
+    color: #4CAF50;
+  }
+  
+  .modal-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: 600;
+  }
+  
+  .modal-message {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 25px;
+    line-height: 1.5;
+  }
+  
+  .modal-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .modal-button:hover {
+    background-color: #3e8e41;
+    transform: translateY(-2px);
+  }
+  
+  /* Already Registered Modal Styles */
+  .modal-overlay .modal-icon svg {
+    color: #FF9800;
+  }
+  
+  .modal-overlay .modal-button {
+    background-color: #FF9800;
+  }
+  
+  .modal-overlay .modal-button:hover {
+    background-color: #e68a00;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideUp {
+    from { 
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @media (max-width: 768px) {
+    .event-poster {
+      max-width: 90% !important;
+    }
+  }
+  
+  
+.accordion-button::after {
+  display: none !important;
+}
+
+/* Custom arrow styling */
+.bi-chevron-down {
+  transition: transform 0.3s ease;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+/* Rest of your existing styles... */
+.faq-section {
+  border-radius: 15px;
+  margin: 40px auto;
+  max-width: 95%;
+}
+
+.accordion-item {
+  border: 1px solid rgba(99, 2, 151, 0.53);
+  border-radius: 30px !important;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(63, 0, 84, 0.444);
+}
+
+.accordion-button {
+  background: linear-gradient(90deg, #fefcff, #fbfdff);
+  font-weight: 500;
+  color: #2c3e50;
+  padding: 1rem 1.5rem;
+}
+
+.accordion-button:not(.collapsed) {
+  background: linear-gradient(90deg, #f0e1ff, #ffe5f4);
+  color: #7e1a1a;
+}
+
+.accordion-body {
+  padding: 1.5rem;
+  background: white;
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.accordion-collapse {
+  display: none;
+}
+
+.accordion-collapse.show {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+  

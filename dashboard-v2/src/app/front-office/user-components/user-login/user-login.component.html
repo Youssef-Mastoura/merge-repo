@@ -1,0 +1,253 @@
+<div class="auth-main">
+  <div class="auth-container">
+    <!-- Partie Formulaire à gauche -->
+    <div class="auth-form-section">
+      <div class="auth-form-wrapper">
+        <div class="auth-header">
+          <h2>Bienvenue</h2>
+          <p>Connectez-vous à votre compte</p>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <div class="d-flex justify-content-between align-items-end mb-4">
+                <h3 class="mb-0"><b>Login</b></h3>
+                <a class="link-primary">Don't have an account?</a>
+              </div>
+              <div class="form-group mb-3">
+                <label class="form-label" for="email">Email Address</label>
+                <input 
+                  type="email" 
+                  class="form-control" 
+                  id="email" 
+                  placeholder="Email Address" 
+                  formControlName="email"
+                  [class.is-invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+                />
+                <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="invalid-feedback">
+                  <div *ngIf="loginForm.get('email')?.errors?.['required']">Email is required</div>
+                  <div *ngIf="loginForm.get('email')?.errors?.['email']">Please enter a valid email</div>
+                </div>
+              </div>
+              <div class="form-group mb-3">
+                <label class="form-label" for="password">Password</label>
+                <input 
+                  type="password" 
+                  class="form-control" 
+                  id="password" 
+                  placeholder="Password" 
+                  formControlName="password"
+                  [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+                />
+                <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="invalid-feedback">
+                  Password is required
+                </div>
+              </div>
+              <div class="d-flex mt-1 justify-content-between">
+                <div class="form-check">
+                  <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
+                  <label class="form-check-label" for="customCheckc1">Keep me sign in</label>
+                </div>
+                <h5 class="text-secondary f-w-400"><a href="javascript:" (click)="showResetPasswordModal = true">Forgot Password?</a></h5>
+              </div>
+              <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Login</button>
+              </div>
+            </form>
+            <div class="saprator mt-3">
+              <span>Login with</span>
+            </div>
+            <div class="row">
+              <div class="mt-6">
+                <asl-google-signin-button 
+                  type="standard"
+                  size="medium"
+                  class="w-full flex justify-center">
+                </asl-google-signin-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Partie Logo à droite -->
+    <div class="auth-logo-section">
+      <div >
+        <img src="./assets/skillswap.png" alt="logo" class="main-logo">
+        <div class="logo-text">
+          <h1>Skillswap</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal pour saisie du code et nouveau mot de passe -->
+<div *ngIf="showCodeVerificationModal" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 fade-in">
+  <div class="auth-wrapper v3">
+    <div class="auth-form">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="text-center mb-4"><b>Changer le mot de passe</b></h3>
+          
+          <div *ngIf="codeVerificationError" class="alert alert-danger mb-4">
+            {{ codeVerificationError }}
+          </div>
+          
+          <div *ngIf="isLoading" class="alert alert-info mb-4">
+            Vérification en cours...
+          </div>
+          
+          <form (ngSubmit)="onSubmitNewPassword()">
+            <div class="form-group mb-3">
+              <label class="form-label">Email</label>
+              <input [(ngModel)]="verificationEmail" name="email" type="email" required
+                     class="form-control" placeholder="Votre email">
+            </div>
+            
+            <div class="form-group mb-3">
+              <label class="form-label">Code de vérification</label>
+              <input [(ngModel)]="verificationCode" name="code" type="text" required
+                     class="form-control" placeholder="Code reçu par email">
+            </div>
+            
+            <div class="form-group mb-4">
+              <label class="form-label">Nouveau mot de passe</label>
+              <input [(ngModel)]="newPassword" name="newPassword" type="password" required
+                     class="form-control" placeholder="Nouveau mot de passe">
+            </div>
+            
+            <div class="d-flex justify-content-end gap-3">
+              <button type="button" 
+                      (click)="showCodeVerificationModal = false"
+                      class="btn btn-secondary">
+                Annuler
+              </button>
+              <button type="submit"
+                      class="btn btn-primary">
+                Valider
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de succès -->
+<div *ngIf="showPasswordChangedModal" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 fade-in">
+  <div class="auth-wrapper v3">
+    <div class="auth-form">
+      <div class="card">
+        <div class="card-body text-center">
+          <h3 class="mb-4"><b>Mot de passe changé</b></h3>
+          <p class="mb-4">Votre mot de passe a été changé avec succès.</p>
+          <button (click)="navigateToLogin()" class="btn btn-primary w-100">
+            Se connecter
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de bienvenue -->
+<div *ngIf="showWelcomeMessage" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 fade-in">
+  <div class="auth-wrapper v3">
+    <div class="auth-form">
+      <div class="card">
+        <div class="card-body text-center">
+          <h3 class="mb-4"><b>Bienvenue {{ welcomeEmail }} !</b></h3>
+          <button (click)="navigateToUser()" class="btn btn-primary w-100">
+            Continuer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Erreur admin -->
+<div *ngIf="showAdminError" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 fade-in">
+  <div class="auth-wrapper v3">
+    <div class="auth-form">
+      <div class="card">
+        <div class="card-body text-center">
+          <h3 class="mb-4"><b>Accès refusé</b></h3>
+          <p class="mb-4">Vous n'êtes pas autorisé à vous connecter en tant qu'administrateur.</p>
+          <button (click)="showAdminError = false" class="btn btn-primary w-100">
+            Compris
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Erreur d'authentification -->
+<div *ngIf="showAuthError" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 fade-in">
+  <div class="auth-wrapper v3">
+    <div class="auth-form">
+      <div class="card">
+        <div class="card-body text-center">
+          <h3 class="mb-4"><b>Échec de connexion</b></h3>
+          <p class="mb-4">Identifiants incorrects, veuillez réessayer.</p>
+          <button (click)="showAuthError = false" class="btn btn-primary w-100">
+            Réessayer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de réinitialisation de mot de passe -->
+<div *ngIf="showResetPasswordModal" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 fade-in">
+  <div class="auth-wrapper v3">
+    <div class="auth-form">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="text-center mb-4"><b>Réinitialiser le mot de passe</b></h3>
+          
+          <div *ngIf="resetPasswordError" class="alert alert-danger mb-4">
+            {{ resetPasswordError }}
+          </div>
+          
+          <div *ngIf="isLoading" class="alert alert-info mb-4">
+            Un email va être envoyé...
+          </div>
+          
+          <div *ngIf="resetPasswordSuccess" class="alert alert-success mb-4">
+            Un email de réinitialisation a été envoyé à {{ resetEmail }}.
+          </div>
+          
+          <div *ngIf="!resetPasswordSuccess">
+            <div class="form-group mb-4">
+              <label class="form-label">Email</label>
+              <input [(ngModel)]="resetEmail" type="email" required
+                     class="form-control" placeholder="Votre email">
+            </div>
+            
+            <div class="d-flex justify-content-end gap-3">
+              <button (click)="showResetPasswordModal = false" class="btn btn-secondary">
+                Annuler
+              </button>
+              <button (click)="onResetPassword()" class="btn btn-primary">
+                Envoyer
+              </button>
+            </div>
+          </div>
+          
+          <div *ngIf="resetPasswordSuccess" class="mt-4">
+            <button (click)="closeResetPasswordModal()" class="btn btn-primary w-100">
+              Continuer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
